@@ -1,16 +1,7 @@
 Restarting R session...
 
 > library(tidyverse)
-── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ───────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package to force all conflicts to become errors
+
 > library(knitr)
 > library(kableExtra)
 
@@ -105,3 +96,113 @@ Using FIPS code '101' for 'Philadelphia County'
 > View(allACS)
 > ggplot(allACS) + 
 +     geom_histogram(aes(change_Grad_Degree_Pct))
+> ggplot(allACS)+
++     geom_histogram(aes(change_med_HH_Income), binwidth = 5000)+
++     labs(
++         title = "Change in Philadelphia HH median income by tract, 2016-2020",
++         caption = "Data: US Census Bureau, ACS 5-year estimates",
++         x="Change in Med HH Income (2020 dollars)", 
++         y="Number of tracts")
+
+  > summaryTable <- allACS %>%
++     summarize(mean_change_HH_Income = mean(change_med_HH_Income, na.rm = TRUE),
++               med_change_HH_Income = median(change_med_HH_Income, na.rm = TRUE))
+> myTracts <- c("42101023500", 
++               "42101023600", 
++               "42101023700", 
++               "42101025300", 
++               "42101025400",
++               "42101025500", 
++               "42101025600", 
++               "42101038800")
+> 
+> allACS <- allACS %>%
++     mutate(mtAiry = ifelse(GEOID %in% myTracts, "MT AIRY", "REST OF PHILADELPHIA"))
+> summaryTable2 <- allACS %>%
++     group_by(mtAiry) %>%
++     summarize(mean_change_HH_Income = mean(change_med_HH_Income, na.rm = TRUE),
++               med_change_HH_Income = median(change_med_HH_Income, na.rm = TRUE))
+
+# Question 2 Part A
+# Adding total vacancy change from 2016 to 2020
+> allACS <- allACS %>%
++    mutate(change_total_vacant = total_vacant.2020 - total_vacant.2016)
+# Negative numbers show  a decrease in vacant homes 
+
+# ggplot of vacancies in Philadelphia 
+> ggplot(allACS)+
++     geom_point(aes(x = vacancyPct.2020 * 100, 
++                    y = change_total_vacant,
++                    color = mtAiry))+
++     geom_abline(intercept = 0, slope = 1)+
++     labs(
++         title = "2020 Vacancy Changes in Philadelphia",
++         subtitle = "Compared to 2016",
++         caption = "Data: US Census Bureau, ACS 5-year estimates",
++         x="Percentage of Total Housing", 
++         y="Total Vacancy Change")
+# The plot shows the total vacancies compared to the percentage of housing units in Philadelphia in 2020 from 2016. Negative numbers represent a decrease in vacancies from 2016.
+
+# Question 2 Part B 
+> ggplot(allACS)+
++     geom_point(aes(x = total_HU.2016, 
++                    y = vacancyPct.2016 * 100,
++                    color = mtAiry))+
++     geom_smooth(aes(x = total_HU.2016, 
++                     y = vacancyPct.2016 * 100), 
++                 method = "lm", se = FALSE)+
++     labs(
++         title = "Vacancy Rates per Tract 2016",
++         caption = "Data: US Census Bureau, ACS 5-year estimates",
++         x="Total Housing Units", 
++         y="Percentage of Vacant Housing Units")
+# The plot shows the percentage of housing vacancies compared to the total housing units per tract in 2016. 
+
+> acsTractsPHL.2016 <- get_acs(geography = "tract",
++                              year = 2016, 
++                              variables = acs_vars,
++                              geometry = TRUE,
++                              state = "PA", 
++                              county = "Philadelphia",
++                              output = "wide") %>%
++     dplyr::select (GEOID, NAME, all_of(acs_vars)) %>% 
++     rename (total_pop.2016 = B01001_001E,
++             total_HU.2016 = B25002_001E,
++             total_vacant.2016 = B25002_003E,
++             med_HH_Income.2016 = B19013_001E,
++             total_White.2016 = B02001_002E,
++             total_GradDeg.2016 = B06009_006E) %>%
++     mutate(vacancyPct.2016 = total_vacant.2016/total_HU.2016,
++            pctWhite.2016 = total_White.2016/total_pop.2016)
+> myTracts <- c("42101023500", 
++               "42101023600", 
++               "42101023700", 
++               "42101025300", 
++               "42101025400",
++               "42101025500", 
++               "42101025600", 
++               "42101038800")
+> 
+> acsTractsPHL.2016 <- acsTractsPHL.2016 %>%
++     mutate(mtAiry = ifelse(GEOID %in% myTracts, "MT AIRY", "REST OF PHILADELPHIA"))
+> ggplot()+
++     geom_sf(data = acsTractsPHL.2016, aes(fill = vacancyPct.2016 * 100),
++             color = "transparent")+
++     geom_sf(data = acsTractsPHL.2016 %>%
++                 filter(mtAiry == "MT AIRY") %>%
++                 st_union(),
++             color = "white",
++             fill = "transparent")+
++     labs(
++         title = "Vacancy Percentage 2016",
++         subtitle = "",
++         caption = "Data: US Census Bureau, ACS 5-year estimates")
+>
+
+# Kable Table, Question 2 Part C
+> library(kableExtra)
+summaryTable4 <- allACS %>%
+    group_by(mtAiry) %>%
+    summarize(mean_total_vacant.2020 = mean(total_vacant.2020, na.rm = TRUE),
+              med_total_vacant.2020 = median(total_vacant.2020, na.rm = TRUE))
+> kbl(summaryTable4)
