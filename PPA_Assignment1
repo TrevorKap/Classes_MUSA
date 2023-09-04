@@ -1,0 +1,103 @@
+Restarting R session...
+
+> library(tidyverse)
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package to force all conflicts to become errors
+> library(knitr)
+> library(kableExtra)
+
+Attaching package: ‘kableExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    group_rows
+
+> library(rmarkdown)
+> library(tidyverse)
+> library(tidycensus)
+> library(sf)
+Linking to GEOS 3.11.2, GDAL 3.6.2, PROJ 9.2.0; sf_use_s2() is TRUE
+> census_api_key("2ad9e737f3d9062836cb46bb568be5467f86d3db", overwrite = TRUE)
+To install your API key for use in future sessions, run this function with `install = TRUE`.
+> {r load_variables, cache = TRUE}
+Error: unexpected symbol in "{r load_variables"
+> acs_variable_list.2020 <- load_variables(2020, #year
++                                          "acs5", #five year ACS estimates
++                                          cache = TRUE)
+> 
+> acs_variable_list.2016 <- load_variables(2016, #year
++                                          "acs5", #five year ACS estimates
++                                          cache = TRUE)
+> View(acs_variable_list.2020)
+> View(acs_variable_list.2016)
+> acs_vars <- c("B01001_001E", # ACS total Pop estimate
++               "B25002_001E", # Estimate of total housing units
++               "B25002_003E", # Number of vacant housing units
++               "B19013_001E", # Median HH Income ($)
++               "B02001_002E", # People describing themselves as "white alone"
++               "B06009_006E") # Total graduate or professional degree
+> acsTractsPHL.2020 <- get_acs(geography = "tract",
++                              year = 2020, 
++                              variables = acs_vars, 
++                              geometry = FALSE, 
++                              state = "PA", 
++                              county = "Philadelphia", 
++                              output = "wide") 
+Getting data from the 2016-2020 5-year ACS
+Using FIPS code '42' for state 'PA'
+Using FIPS code '101' for 'Philadelphia County'
+> acsTractsPHL.2020 <- acsTractsPHL.2020 %>%
++     dplyr::select (GEOID, NAME, all_of(acs_vars))
+> 
+> acsTractsPHL.2020 <- acsTractsPHL.2020 %>%
++     rename (total_pop.2020 = B01001_001E,
++             total_HU.2020 = B25002_001E,
++             total_vacant.2020 = B25002_003E,
++             med_HH_Income.2020 = B19013_001E,
++             total_White.2020 = B02001_002E,
++             total_GradDeg.2020 = B06009_006E)
+> 
+> acsTractsPHL.2020 <- acsTractsPHL.2020 %>%
++     mutate(vacancyPct.2020 = total_vacant.2020/total_HU.2020,
++            pctWhite.2020   = total_White.2020/total_pop.2020)
+> acsTractsPHL.2016 <- get_acs(geography = "tract",
++                              year = 2016, 
++                              variables = acs_vars,
++                              geometry = FALSE,
++                              state = "PA", 
++                              county = "Philadelphia",
++                              output = "wide") %>%
++     dplyr::select (GEOID, NAME, all_of(acs_vars)) %>% 
++     rename (total_pop.2016 = B01001_001E,
++             total_HU.2016 = B25002_001E,
++             total_vacant.2016 = B25002_003E,
++             med_HH_Income.2016 = B19013_001E,
++             total_White.2016 = B02001_002E,
++             total_GradDeg.2016 = B06009_006E) %>%
++     mutate(vacancyPct.2016 = total_vacant.2016/total_HU.2016,
++            pctWhite.2016 = total_White.2016/total_pop.2016)
+Getting data from the 2012-2016 5-year ACS
+Using FIPS code '42' for state 'PA'
+Using FIPS code '101' for 'Philadelphia County'
+> allACS <- left_join(acsTractsPHL.2016, acsTractsPHL.2020,
++                     by= c("GEOID"))
+> allACS <- allACS %>%
++     mutate(change_med_HH_Income = med_HH_Income.2020 - (med_HH_Income.2016 * 1.08), 
++            change_Grad_Degree_Pct = (total_GradDeg.2020/total_pop.2020)-(total_GradDeg.2016/total_pop.2016))
+> View(acs_variable_list.2020)
+> View(allACS)
+> mean(allACS$change_med_HH_Income)
+[1] NA
+> mean(allACS$change_med_HH_Income, na.rm = TRUE)
+[1] 6012.472
+> 
+> median(allACS$change_med_HH_Income, na.rm = TRUE)
+[1] 4873.76
