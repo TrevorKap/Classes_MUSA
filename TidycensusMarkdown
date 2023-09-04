@@ -101,3 +101,7 @@ Using FIPS code '101' for 'Philadelphia County'
 > 
 > median(allACS$change_med_HH_Income, na.rm = TRUE)
 [1] 4873.76
+> hist(allACS$change_med_HH_Income)
+> View(allACS)
+> ggplot(allACS) + 
++     geom_histogram(aes(change_Grad_Degree_Pct))
