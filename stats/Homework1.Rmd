@@ -38,6 +38,7 @@ Reg_sf <- st_read("C:/Users/Owner/Documents/RStudio/MUSAStatistics/Lecture1Regre
 
 ```
 
+This is a change to make sure I am pushing correctly to the repository.
 
 
 ```{r Distribution Histograms}
