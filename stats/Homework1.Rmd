@@ -207,15 +207,19 @@ plot(predictions, standardized_residuals,
 ```
 
 ```{r Question 3}
+#not done yet idfk what to do
 Reg2 <- lm(MEDHVAL ~ PCTVACANT + PCTSINGLES + PCTBACHMOR + NBELPOV100, data = RegD)
-  
+
+summary(Reg2)
+
 ```
 
 ```{r Question 4}
 
 cv <- CVlm(data=as.data.frame(Reg_sf),RegD,m=5) 
 mse <- attr(cv,"ms")
-rmse <- sqrt(mse) rmse
+rmse <- sqrt(mse) 
+rmse
 
 
 ```
