@@ -227,7 +227,7 @@ step$anova
 ```
 
 ```{r Question 4 original model}
-
+ 
 cv_results <- CVlm(data=RegD, m=5)
 mse <- attr(cv_results, "ms")
 rmse <- sqrt(mse)
