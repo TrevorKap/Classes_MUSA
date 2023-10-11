@@ -104,6 +104,9 @@ hist(RegD$LN_PCTVACANT, main = "Log of Proportion of Vacant Housing Units", xlab
 hist(RegD$LN_PCTSINGLES, main = "Log of Percent of Housing Units that are 'detached single family houses'", xlab = "LN PCTSINGLE")
 
 hist(RegD$LN_BELPOV100, main = "Log of Households declared to be in poverty", xlab = "LN NBELPOV100")
+
+#make correlation matrix here 
+
 ```
 ```{r Scatter Plots between Median Home Value & Predictors}
 par(mfrow = c(2, 2))
@@ -202,6 +205,9 @@ plot(predictions, standardized_residuals,
 
 
 ```{r Question 3}
+#Stepbro Model 
+
+step_aic
 
 
 
