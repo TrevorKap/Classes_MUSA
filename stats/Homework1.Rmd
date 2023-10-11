@@ -206,14 +206,14 @@ plot(predictions, standardized_residuals,
 ```
 
 ```{r Question 3}
-#Stepbro Model 
-stepAIC(RegD, direction="both")$anova
+Reg2 <- lm(MEDHVAL ~ PCTVACANT + PCTSINGLES + PCTBACHMOR + NBELPOV100, data = RegD)
   
 ```
 
 ```{r Question 4}
 
-cv <- DAAG:CVlm(data=as.data.frame(Reg_sf),RegD,m=5) mse <- attr(cv,"ms")
+cv <- CVlm(data=as.data.frame(Reg_sf),RegD,m=5) 
+mse <- attr(cv,"ms")
 rmse <- sqrt(mse) rmse
 
 
