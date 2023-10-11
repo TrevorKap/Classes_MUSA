@@ -25,7 +25,7 @@ options(scipen=999)
 
 ```{r Distribution Histograms}
 #Dependent Variable
-hist(RegD$MEDHVAL, main = "Distribution of Median House Value", xlab = "MEDHVAL")
+hist(RegD$MEDHVAL, main = "Distribution of Median House Value", xlab = "MEDHVAL", breaks = 50)
 
 #Predictors
 hist(RegD$PCTBACHMOR, main = "Distribution of Proportion of Residents in Block with at least a Bachelors", xlab = "PCTBACHMORE")
@@ -67,14 +67,17 @@ sd(RegD$MEDHHINC)
 ```
 
 ```{r Log Variables}
+filter(RegD, MEDHVAL == 0)
 RegD$LN_MEDHVAL <- log(RegD$MEDHVAL)
+
 RegD$LN_PCBACHMORE <- log(1+RegD$PCTBACHMOR)
 RegD$LN_BELPOV100 <- log(1+RegD$NBELPOV100)
 RegD$LN_PCTVACANT <- log(1+RegD$PCTVACANT)
 RegD$LN_PCTSINGLES <- log(1+RegD$PCTSINGLES)
 ```
 
-```{r Logirtihmic Histograms}
+```{r Logirtihmic Histograms} 
+#make 50 bins again 
 hist(RegD$LN_MEDHVAL, main = "Log of Distribution of Median House Value", xlab = "LN MEDHVAL")
 
 hist(RegD$LN_PCBACHMORE, main = "Log of Distribution of Proportion of Residents in Block with at least a Bachelors", xlab = "LN PCTBACHMOR")
@@ -191,6 +194,15 @@ plot(predictions, standardized_residuals,
     title("Scatter Plot of Standardized Residuals vs. Predicted Values")
     
 ```
+
+
+```{r Question 3}
+
+
+
+
+```
+
 
 
 
