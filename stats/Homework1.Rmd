@@ -215,11 +215,9 @@ step$anova
 ```
 
 ```{r Question 4}
-
-cv <- CVlm(data=as.data.frame(Reg_sf),RegD,m=5) 
-mse <- attr(cv,"ms")
-rmse <- sqrt(mse) 
+k = 5
+cv_results <- CVlm(Reg2, folds = k, Reg2)
+rmse <- sqrt(mean(cv_results$mse))
 rmse
-
 
 ```
