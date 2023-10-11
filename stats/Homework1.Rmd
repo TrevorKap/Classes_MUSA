@@ -214,7 +214,15 @@ step$anova
 
 ```
 
-```{r Question 4}
+```{r Question 4 original model}
+k = 5
+cv_results <- CVlm(RegD, folds = k, RegD)
+rmse <- sqrt(mean(cv_results$mse))
+rmse
+
+```
+
+```{r Question 4 original model}
 k = 5
 cv_results <- CVlm(Reg2, folds = k, Reg2)
 rmse <- sqrt(mean(cv_results$mse))
