@@ -26,6 +26,8 @@ library(sf)
 library(sp)
 library(ggplot2)
 library(dplyr)
+library(MASS)
+library(DAAG)
 library(autoNumCaptions)
 library(gridExtra)
 library(autoNumCaptions)
@@ -206,16 +208,14 @@ plot(predictions, standardized_residuals,
 
 ```{r Question 3}
 #Stepbro Model 
-
-step_aic
-
-
-
-
+MASS::stepAIC(RegD, direction="both")$anova
+  
 ```
+```{r Question 4}
 
-
-
-
+cv <- DAAG:CVlm(data=as.data.frame(shp),RegD,m=5)
+mse <- attr(cv,"ms")
+rmse <- sqrt(mse)
+rmse
 
 
