@@ -222,7 +222,7 @@ rmse
 
 ```
 
-```{r Question 4 original model}
+```{r Question 4 set model}
 k = 5
 cv_results <- CVlm(Reg2, folds = k, Reg2)
 rmse <- sqrt(mean(cv_results$mse))
