@@ -209,8 +209,8 @@ plot(predictions, standardized_residuals,
 ```{r Question 3}
 #not done yet idfk what to do
 Reg2 <- lm(MEDHVAL ~ PCTVACANT + PCTSINGLES + PCTBACHMOR + NBELPOV100, data = RegD)
-
-summary(Reg2)
+step <- stepAIC(Reg2, direction="both")
+step$anova
 
 ```
 
