@@ -49,15 +49,15 @@ This is a change to make sure I am pushing correctly to the repository.
 hist(RegD$MEDHVAL, main = "Distribution of Median House Value", xlab = "MEDHVAL", breaks = 50)
 
 #Predictors
-hist(RegD$PCTBACHMOR, main = "Distribution of Proportion of Residents in Block with at least a Bachelors", xlab = "PCTBACHMORE")
+hist(RegD$PCTBACHMOR, main = "Distribution of Proportion of Residents in Block with at least a Bachelors", xlab = "PCTBACHMORE", breaks = 50)
 
-hist(RegD$PCTVACANT, main = "Proportion of Vacant Housing Units", xlab = "PCTVACANT")
+hist(RegD$PCTVACANT, main = "Proportion of Vacant Housing Units", xlab = "PCTVACANT", breaks = 50)
 
-hist(RegD$PCTSINGLES, main = "Percent of Housing Units that are 'detached single family houses'", xlab = "PCTSINGLE")
+hist(RegD$PCTSINGLES, main = "Percent of Housing Units that are 'detached single family houses'", xlab = "PCTSINGLE", breaks = 50)
 
-hist(RegD$NBELPOV100, main = "Households declared to be in poverty", xlab = "NBELPOV100")
+hist(RegD$NBELPOV100, main = "Households declared to be in poverty", xlab = "NBELPOV100", breaks = 50)
 
-hist(RegD$MEDHHINC, main = "Median Household Income", xlab = "MEDHHINC")
+hist(RegD$MEDHHINC, main = "Median Household Income", xlab = "MEDHHINC", breaks = 50)
 ```
 
 ```{r Means, and Standard Deviation}
@@ -99,17 +99,21 @@ RegD$LN_PCTSINGLES <- log(1+RegD$PCTSINGLES)
 
 ```{r Logirtihmic Histograms}
 #make 50 bins again 
-hist(RegD$LN_MEDHVAL, main = "Log of Distribution of Median House Value", xlab = "LN MEDHVAL")
+hist(RegD$LN_MEDHVAL, main = "Log of Distribution of Median House Value", xlab = "LN MEDHVAL", breaks = 50)
 
-hist(RegD$LN_PCBACHMORE, main = "Log of Distribution of Proportion of Residents in Block with at least a Bachelors", xlab = "LN PCTBACHMOR")
+hist(RegD$LN_PCBACHMORE, main = "Log of Distribution of Proportion of Residents in Block with at least a Bachelors", xlab = "LN PCTBACHMOR", breaks = 50)
 
-hist(RegD$LN_PCTVACANT, main = "Log of Proportion of Vacant Housing Units", xlab = "LN PCTVACANT")
+hist(RegD$LN_PCTVACANT, main = "Log of Proportion of Vacant Housing Units", xlab = "LN PCTVACANT", breaks = 50)
 
-hist(RegD$LN_PCTSINGLES, main = "Log of Percent of Housing Units that are 'detached single family houses'", xlab = "LN PCTSINGLE")
+hist(RegD$LN_PCTSINGLES, main = "Log of Percent of Housing Units that are 'detached single family houses'", xlab = "LN PCTSINGLE", breaks = 50)
 
-hist(RegD$LN_BELPOV100, main = "Log of Households declared to be in poverty", xlab = "LN NBELPOV100")
+hist(RegD$LN_BELPOV100, main = "Log of Households declared to be in poverty", xlab = "LN NBELPOV100", breaks = 50)
 
-#make correlation matrix here 
+```
+
+```{r Correlation Matrix}
+
+
 
 ```
 
