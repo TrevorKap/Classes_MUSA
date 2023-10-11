@@ -12,6 +12,7 @@ editor_options:
   markdown: 
     wrap: 72
 ---
+
 ```{r setup clear environment,  include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 rm(list=ls())
@@ -41,7 +42,6 @@ Reg_sf <- st_read("C:/Users/Owner/Documents/RStudio/MUSAStatistics/Lecture1Regre
 ```
 
 This is a change to make sure I am pushing correctly to the repository.
-
 
 ```{r Distribution Histograms}
 #Dependent Variable
@@ -96,7 +96,7 @@ RegD$LN_PCTVACANT <- log(1+RegD$PCTVACANT)
 RegD$LN_PCTSINGLES <- log(1+RegD$PCTSINGLES)
 ```
 
-```{r Logirtihmic Histograms} 
+```{r Logirtihmic Histograms}
 #make 50 bins again 
 hist(RegD$LN_MEDHVAL, main = "Log of Distribution of Median House Value", xlab = "LN MEDHVAL")
 
@@ -111,6 +111,7 @@ hist(RegD$LN_BELPOV100, main = "Log of Households declared to be in poverty", xl
 #make correlation matrix here 
 
 ```
+
 ```{r Scatter Plots between Median Home Value & Predictors}
 par(mfrow = c(2, 2))
 plot(RegD$LN_MEDHVAL, RegD$PCBACHMOR, main = "LN_MEDHVAL vs. PCBACHMORE", xlab = "LN_MEDHVAL", ylab = "PCBACHMORE")
@@ -133,8 +134,6 @@ cor(RegD$LN_MEDHVAL, RegD$PCTBACHMOR)
 cor(RegD$LN_MEDHVAL, RegD$LN_BELPOV100)
 
 ```
-
-
 
 ```{r Chloropleth Maps}
 par(mfrow = c(2, 2))
@@ -206,17 +205,16 @@ plot(predictions, standardized_residuals,
     
 ```
 
-
 ```{r Question 3}
 #Stepbro Model 
-MASS::stepAIC(RegD, direction="both")$anova
+stepAIC(RegD, direction="both")$anova
   
 ```
+
 ```{r Question 4}
 
-cv <- DAAG:CVlm(data=as.data.frame(shp),RegD,m=5)
-mse <- attr(cv,"ms")
-rmse <- sqrt(mse)
-rmse
+cv <- DAAG:CVlm(data=as.data.frame(Reg_sf),RegD,m=5) mse <- attr(cv,"ms")
+rmse <- sqrt(mse) rmse
 
 
+```
