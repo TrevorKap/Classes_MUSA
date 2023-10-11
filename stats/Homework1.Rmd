@@ -31,6 +31,7 @@ library(MASS)
 library(DAAG)
 library(autoNumCaptions)
 library(gridExtra)
+library(stargazer)
 library(autoNumCaptions)
 devtools::install_github("kstagaman/autoNumCaptions")
 # load custom functions from the book 
