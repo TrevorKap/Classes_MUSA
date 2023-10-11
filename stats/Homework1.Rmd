@@ -21,7 +21,24 @@ rm(list=ls())
 RegD = read.csv("RegressionData.csv")
 # we don't want scientific notation
 options(scipen=999)
+
+library(sf)
+library(sp)
+library(ggplot2)
+library(dplyr)
+library(autoNumCaptions)
+library(gridExtra)
+library(autoNumCaptions)
+devtools::install_github("kstagaman/autoNumCaptions")
+# load custom functions from the book 
+root.dir = "https://github.com/TrevorKap/Classes/raw/main/stats/"
+#Test1_shp <- st_read("https://raw.githubusercontent.com/TrevorKap/Classes/main/stats/RegressionData.shp")
+Reg_db <- st_read("https://github.com/TrevorKap/Classes/raw/main/stats/RegressionData.dbf")
+Reg_sf <- st_read("C:/Users/Owner/Documents/RStudio/MUSAStatistics/Lecture1RegressionData/RegressionData.shp")
+
 ```
+
+
 
 ```{r Distribution Histograms}
 #Dependent Variable
@@ -111,21 +128,7 @@ cor(RegD$LN_MEDHVAL, RegD$LN_BELPOV100)
 
 ```
 
-```{r installing sf}
-library(sf)
-library(sp)
-library(ggplot2)
-library(dplyr)
-library(autoNumCaptions)
-library(gridExtra)
-library(autoNumCaptions)
-devtools::install_github("kstagaman/autoNumCaptions")
-# load custom functions from the book 
-root.dir = "https://github.com/TrevorKap/Classes/raw/main/stats/"
-#Test1_shp <- st_read("https://raw.githubusercontent.com/TrevorKap/Classes/main/stats/RegressionData.shp")
-Reg_db <- st_read("https://github.com/TrevorKap/Classes/raw/main/stats/RegressionData.dbf")
-Reg_sf <- st_read("C:/Users/Owner/Documents/RStudio/MUSAStatistics/Lecture1RegressionData/RegressionData.shp")
-```
+
 
 ```{r Chloropleth Maps}
 par(mfrow = c(2, 2))
@@ -171,9 +174,11 @@ Regression <- lm(LN_MEDHVAL ~ PCTVACANT + PCTSINGLES + PCTBACHMOR + LN_BELPOV100
 summary(Regression)
 
 ```
+
 ```{r anova of regression pB }
 anova(Regression)
 ```
+
 ```{r Part C}
 
 predictions <- fitted(Regression)
