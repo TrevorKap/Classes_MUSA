@@ -29,6 +29,7 @@ library(ggplot2)
 library(dplyr)
 library(MASS)
 library(DAAG)
+library(corrr)
 library(autoNumCaptions)
 library(gridExtra)
 library(stargazer)
@@ -112,6 +113,13 @@ hist(RegD$LN_BELPOV100, main = "Log of Households declared to be in poverty", xl
 ```
 
 ```{r Correlation Matrix}
+RegDnums <- 
+  select_if(st_drop_geometry(Reg_sf), is.numeric) %>% na.omit()
+
+RegDnums %>% 
+  correlate() %>% 
+  autoplot() +
+  geom_text(aes(label = round(r,digits=2)), size = 3.5, order = "hclust", type = "upper", tl.cex = 3)
 
 
 
@@ -219,9 +227,10 @@ step$anova
 ```
 
 ```{r Question 4 original model}
-k = 5
-cv_results <- CVlm(RegD, folds = k, RegD)
-rmse <- sqrt(mean(cv_results$mse))
+
+cv_results <- CVlm(data=RegD, m=5)
+mse <- attr(cv_results, "ms")
+rmse <- sqrt(mse)
 rmse
 
 ```
