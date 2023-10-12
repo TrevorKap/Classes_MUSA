@@ -26,6 +26,7 @@ options(scipen=999)
 library(sf)
 library(sp)
 library(ggplot2)
+library(viridis)
 library(dplyr)
 library(MASS)
 library(DAAG)
@@ -39,7 +40,7 @@ devtools::install_github("kstagaman/autoNumCaptions")
 root.dir = "https://github.com/TrevorKap/Classes/raw/main/stats/"
 #Test1_shp <- st_read("https://raw.githubusercontent.com/TrevorKap/Classes/main/stats/RegressionData.shp")
 Reg_db <- st_read("https://github.com/TrevorKap/Classes/raw/main/stats/RegressionData.dbf")
-Reg_sf <- st_read("C:/Users/Owner/Documents/RStudio/MUSAStatistics/Lecture1RegressionData/RegressionData.shp")
+Reg_shp <- st_read("C:/Users/Owner/Documents/RStudio/MUSAStatistics/Lecture1RegressionData/RegressionData.shp")
 
 ```
 
@@ -114,7 +115,7 @@ hist(RegD$LN_BELPOV100, main = "Log of Households declared to be in poverty", xl
 
 ```{r Correlation Matrix}
 RegDnums <- 
-  select_if(st_drop_geometry(Reg_sf), is.numeric) %>% na.omit()
+  select_if(st_drop_geometry(Reg_shp), is.numeric) %>% na.omit()
 
 RegDnums %>% 
   correlate() %>% 
@@ -151,32 +152,32 @@ cor(RegD$LN_MEDHVAL, RegD$LN_BELPOV100)
 ```{r Chloropleth Maps}
 par(mfrow = c(2, 2))
 ggplot() +
-  geom_sf(data = Reg_sf, aes(fill = LNMEDHVAL))+
+  geom_sf(data = Reg_shp, aes(fill = LNMEDHVAL))+
 #  coord_sf(projection = crs("C:/Users/Owner/Documents/RStudio/MUSAStatistics/Lecture1RegressionData/RegressionData.shp")
   labs(title = "Logarithmic Median Home Value")+
   scale_fill_gradient(low = "white", high = "red")+
   theme_bw()
 
 ggplot() +
-  geom_sf(data = Reg_sf, aes(fill = PCTVACANT))+
+  geom_sf(data = Reg_shp, aes(fill = PCTVACANT))+
   labs(title = "Percent of Vacant Homes")+
   scale_fill_gradient(low = "white", high = "blue")+
   theme_bw()
 
 ggplot() +
-  geom_sf(data = Reg_sf, aes(fill = PCTSINGLES))+
+  geom_sf(data = Reg_shp, aes(fill = PCTSINGLES))+
   labs(title = "Percentage of Houses classified as Sinlge Family Detached")+
   scale_fill_gradient(low = "white", high = "brown")+
   theme_bw() 
 
 ggplot() +
-  geom_sf(data = Reg_sf, aes(fill = PCTBACHMOR))+
+  geom_sf(data = Reg_shp, aes(fill = PCTBACHMOR))+
   labs(title = "Percentage of people with at least a Bachelors")+
   scale_fill_gradient(low = "white", high = "darkgreen")+
   theme_bw()
 
 ggplot() +
-  geom_sf(data = Reg_sf, aes(fill = LNNBELPOV))+
+  geom_sf(data = Reg_shp, aes(fill = LNNBELPOV))+
   labs(title = "Log of Households Below the Poverty Line")+
   scale_fill_gradient(low = "white", high = "purple")+
   theme_bw()
@@ -187,13 +188,13 @@ ggplot() +
 ## Part 2
 
 ```{r regression part A}
-Regression <- lm(LN_MEDHVAL ~ PCTVACANT + PCTSINGLES + PCTBACHMOR + LN_BELPOV100, data = RegD)
+Regression <- lm(LNMEDHVAL ~ PCTVACANT + PCTSINGLES + PCTBACHMOR + LNNBELPOV, data = Reg_shp)
 
 summary(Regression)
 
 ```
 
-```{r anova of regression pB }
+```{r anova of regression Part B }
 anova(Regression)
 ```
 
@@ -219,16 +220,14 @@ plot(predictions, standardized_residuals,
 ```
 
 ```{r Question 3}
-#not done yet idfk what to do
-Reg2 <- lm(MEDHVAL ~ PCTVACANT + PCTSINGLES + PCTBACHMOR + NBELPOV100, data = RegD)
-step <- stepAIC(Reg2, direction="both")
-step$anova
+
+MASS::stepAIC(Regression, direction="both")$anova
 
 ```
 
-```{r Question 4 original model}
+```{r Question 4, fig.width=5, fig.height=5}
  
-cv_results <- CVlm(data=RegD, m=5)
+cv_results <- DAAG::CVlm(data=as.data.frame(Reg_shp), Regression, m=5)
 mse <- attr(cv_results, "ms")
 rmse <- sqrt(mse)
 rmse
@@ -236,9 +235,16 @@ rmse
 ```
 
 ```{r Question 4 set model}
-k = 5
-cv_results <- CVlm(Reg2, folds = k, Reg2)
-rmse <- sqrt(mean(cv_results$mse))
-rmse
+hist(standardized_residuals)
+
+minimum_standard_residuals <- min(standardized_residuals)
+centered_standard_residuals <- standardized_residuals-minimum_standard_residuals
+
+ggplot()+
+  geom_sf(data=Reg_shp, aes(fill = centered_standard_residuals+1))+
+  labs(title = "Centered Standard Residual")+
+  scale_fill_gradient(low = "black", high = "orange")+
+  theme_bw()
+
 
 ```
