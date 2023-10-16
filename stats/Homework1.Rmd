@@ -246,5 +246,8 @@ ggplot()+
   scale_fill_gradient(low = "black", high = "orange")+
   theme_bw()
 
+ggplot(data=Reg_shp)+geom_sf(fill=centered_standard_residuals+1)
+
+#not sure which one to use
 
 ```
