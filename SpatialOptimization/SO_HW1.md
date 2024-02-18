@@ -13,7 +13,8 @@ output:
     toc: yes
 ---
 
-```{r setup, results = 'hide', message = FALSE, warning = FALSE, error = FALSE}
+
+```r
 library(tidyverse)
 library(tidycensus)
 library(sf)
@@ -56,21 +57,21 @@ After solving the maximization problem with CPLEX, the MCLP will give us the ide
 
 # Part B
 
-As alluded to in the methodology part, the constraints of the optimization problem can greatly affect the ideal location of sites. Below, we see how a willingness to walk 250m vs 500m to a bus stop can significantly increase coverage. 
+As alluded to in the methodology part, the constraints of the optimization problem can greatly affect the ideal location of sites. Below, we see how a willigness to walk 250m vs 500m to a bus stop can significantly increase coverage. 
 
-```{r setup2}
-knitr::include_graphics("/Users/nohman/Downloads/Graphic_1.png")
 
+```r
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/blob/main/SpatialOptimization/SpatialOptHW1.png")
 ```
 
-We first look at the Pareto-Front for different budget constraints and see the typical decreasing margins. This is because in an optimization problem, the "best" locations are picked first, and the "worst" locations last. In this context, best and worse is measured as in demand coverage. Each line, regardless of willingness to travel, eventually 'flatlines' because the problem no longer becomes how many people can be reached per station, but the lack of stations capable of covering new distances. Regardless, having the double in willing distance (250m to 500m) results in a double in accessible population. The greatest increase in change (slope) is between when adding 1 to 6 bus stops, where 500m bus stops are more than double in outreach than 250m ones. 
+![](https://github.com/TrevorKap/Classes_MUSA/blob/main/SpatialOptimization/SpatialOptHW1.png)<!-- -->
+We first look at the Pareto-Front for different budget constraints and see the typical decreasing margins. This is because in an optimization problem, the "best" locations are picked first, and the "worst" locations last. In this context, best and worse is measured as in demand coverage. 
 
-
-
-```{r setup3}
-knitr::include_graphics("/Users/nohman/Downloads/Graphic_2.png")
-
+```r
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/blob/main/SpatialOptimization/Optimized%20Bus%20Stop.png")
 ```
+
+![](https://github.com/TrevorKap/Classes_MUSA/blob/main/SpatialOptimization/Optimized%20Bus%20Stop.png)<!-- -->
 We then see how the effect plays out visually and realize that that doubling the willingness to walk genuinely makes a big difference. One policy implication for this could be to motivate inhabitants to walk more, e.g., through advertising the health benefits of doing a certain amount of exercise or walk per day.
 
 There are three main shortcomings which we want to address. Firstly, as was demonstrated in class, Euclidean and Network Distance can severely differ in the sense that the Euclidean metric overestimates the reachable population. Secondly, the model doe not take into account whether the stops offered to the population actually satisfy their travel needs. It could be that accessibility is high, but the routes offered are rarely used. This also includes issues of directionality. Lastly, the true geography of the network is not taken into account. It could be that in some areas, there are severe elevation differences making routes that are officially walkable extremely difficult for elderly or disabled population. One prime example for a city where this would apply is Lisbon that is built on several hills.
