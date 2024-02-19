@@ -1,5 +1,5 @@
 ---
-title: '**Spatial Optimization: Maximum Covering Location Problem**'
+title: '**TITLE HERE**'
 output:
   html_document:
     keep_md: yes
