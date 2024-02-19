@@ -1,5 +1,7 @@
 ---
 title: '**TITLE HERE**'
+author: "Trevor Kapuvari, Nohman Akhtari"
+date: "02/19/2024"
 output:
   html_document:
     keep_md: yes
