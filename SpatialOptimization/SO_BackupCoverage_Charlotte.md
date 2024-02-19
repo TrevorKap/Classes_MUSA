@@ -61,10 +61,10 @@ As alluded to in the methodology part, the constraints of the optimization probl
 
 
 ```r
-knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/05b7b66704f558545d1ff08120390534993bf755/SpatialOptimization/SpatialOptHW2chart1.png")
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart1New.png")
 ```
 
-![](https://github.com/TrevorKap/Classes_MUSA/raw/05b7b66704f558545d1ff08120390534993bf755/SpatialOptimization/SpatialOptHW2chart1.png)<!-- -->
+![](https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart1New.png)<!-- -->
 
 We first look at the Pareto-Front for different budget constraints and see the typical decreasing margins. This is because in an optimization problem, the "best" locations are picked first, and the "worst" locations last. In this context, best and worse is measured as in demand coverage. Each line, regardless of willingness to travel, eventually 'flatlines' because the problem no longer becomes how many people can be reached per station, but the lack of stations capable of covering new distances. Regardless, having the double in willing distance (250m to 500m) results in a double in accessible population. The greatest increase in change (slope) is between when adding 1 to 6 bus stops, where 500m bus stops are more than double in outreach than 250m ones. 
 
@@ -72,10 +72,10 @@ We first look at the Pareto-Front for different budget constraints and see the t
 
 
 ```r
-knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/05b7b66704f558545d1ff08120390534993bf755/SpatialOptimization/SpatialOptHW2chart2.png")
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart2New.png")
 ```
 
-![](https://github.com/TrevorKap/Classes_MUSA/raw/05b7b66704f558545d1ff08120390534993bf755/SpatialOptimization/SpatialOptHW2chart2.png)<!-- -->
+![](https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart2New.png)<!-- -->
 We then see how the effect plays out visually and realize that that doubling the willingness to walk genuinely makes a big difference. One policy implication for this could be to motivate inhabitants to walk more, e.g., through advertising the health benefits of doing a certain amount of exercise or walk per day.
 
 There are three main shortcomings which we want to address. Firstly, as was demonstrated in class, Euclidean and Network Distance can severely differ in the sense that the Euclidean metric overestimates the reachable population. Secondly, the model doe not take into account whether the stops offered to the population actually satisfy their travel needs. It could be that accessibility is high, but the routes offered are rarely used. This also includes issues of directionality. Lastly, the true geography of the network is not taken into account. It could be that in some areas, there are severe elevation differences making routes that are officially walkable extremely difficult for elderly or disabled population. One prime example for a city where this would apply is Lisbon that is built on several hills.

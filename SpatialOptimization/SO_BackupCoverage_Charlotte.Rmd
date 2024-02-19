@@ -1,5 +1,7 @@
 ---
 title: '**TITLE HERE**'
+author: "Trevor Kapuvari, Nohman Akhtari"
+date: "02/19/2024"
 output:
   html_document:
     keep_md: yes
@@ -59,7 +61,7 @@ After solving the maximization problem with CPLEX, the MCLP will give us the ide
 As alluded to in the methodology part, the constraints of the optimization problem can greatly affect the ideal location of sites. Below, we see how a willingness to walk 250m vs 500m to a bus stop can significantly increase coverage. 
 
 ```{r Chart 1}
-knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/05b7b66704f558545d1ff08120390534993bf755/SpatialOptimization/SpatialOptHW2chart1.png")
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart1New.png")
 
 ```
 
@@ -68,7 +70,7 @@ We first look at the Pareto-Front for different budget constraints and see the t
 
 
 ```{r Chart 2}
-knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/05b7b66704f558545d1ff08120390534993bf755/SpatialOptimization/SpatialOptHW2chart2.png")
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart2New.png")
 
 ```
 We then see how the effect plays out visually and realize that that doubling the willingness to walk genuinely makes a big difference. One policy implication for this could be to motivate inhabitants to walk more, e.g., through advertising the health benefits of doing a certain amount of exercise or walk per day.
