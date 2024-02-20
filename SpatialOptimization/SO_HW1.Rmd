@@ -75,14 +75,14 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/acbff38ff
 
 When starting with the outlier, facility 2, roughly 80% of demand is already covered. Following the next largest nodes of demand fractionally increase coverage until there is marginal returns per additional covered site (P value).
 
-# Cast Study, Moscow, Idaho
+# Cast Study | Moscow, Idaho
 
 Our first observation of the cover location problem brings us to the town of Moscow, Idaho. Moscow, like much of the state, has a small-town suburban landscape where cars are the primary source for transportation. Public transportation takes the form of buses but is overshadowed in usage compared to automobiles. We are observing how a person's willingness to travel (i.e walk) can effect the potential coverage of bus stops in the town. 
 
 As alluded to in the methodology part, the constraints of the optimization problem can greatly affect the ideal location of sites. Below, we see how a willingness to walk 250m vs 500m to a bus stop can significantly increase coverage. 
 
 ```{r setup2}
-knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/07c1cc0cfadea9492a46b1b9558bdf460171e594/SpatialOptimization/SpatialOptHW1New.png")
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/0cd9832396cc9eb5e1d218bfea1cdc3129fcf0f2/SpatialOptimization/SpatialOptHW1.png")
 
 ```
 

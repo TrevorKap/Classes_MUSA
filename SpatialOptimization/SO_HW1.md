@@ -78,7 +78,7 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/acbff38ff
 
 When starting with the outlier, facility 2, roughly 80% of demand is already covered. Following the next largest nodes of demand fractionally increase coverage until there is marginal returns per additional covered site (P value).
 
-# Cast Study, Moscow, Idaho
+# Cast Study | Moscow, Idaho
 
 Our first observation of the cover location problem brings us to the town of Moscow, Idaho. Moscow, like much of the state, has a small-town suburban landscape where cars are the primary source for transportation. Public transportation takes the form of buses but is overshadowed in usage compared to automobiles. We are observing how a person's willingness to travel (i.e walk) can effect the potential coverage of bus stops in the town. 
 
@@ -86,10 +86,10 @@ As alluded to in the methodology part, the constraints of the optimization probl
 
 
 ```r
-knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/07c1cc0cfadea9492a46b1b9558bdf460171e594/SpatialOptimization/SpatialOptHW1New.png")
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/0cd9832396cc9eb5e1d218bfea1cdc3129fcf0f2/SpatialOptimization/SpatialOptHW1.png")
 ```
 
-![](https://github.com/TrevorKap/Classes_MUSA/raw/07c1cc0cfadea9492a46b1b9558bdf460171e594/SpatialOptimization/SpatialOptHW1New.png)<!-- -->
+![](https://github.com/TrevorKap/Classes_MUSA/raw/0cd9832396cc9eb5e1d218bfea1cdc3129fcf0f2/SpatialOptimization/SpatialOptHW1.png)<!-- -->
 
 We first look at the Pareto-Front for different budget constraints and see the typical decreasing margins. This is because in an optimization problem, the "best" locations are picked first, and the "worst" locations last. In this context, best and worse is measured as in demand coverage. Each line, regardless of willingness to travel, eventually 'flatlines' because the problem no longer becomes how many people can be reached per station, but the lack of stations capable of covering new distances. Regardless, having the double in willing distance (250m to 500m) results in a double in accessible population. The greatest increase in change (slope) is between when adding 1 to 6 bus stops, where 500m bus stops are more than double in outreach than 250m ones. 
 

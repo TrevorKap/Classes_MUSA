@@ -1,5 +1,5 @@
 ---
-title: '**TITLE HERE**'
+title: '**Measuring Redundant Bus Stops in Charlotte, North Carolina**'
 author: "Trevor Kapuvari, Nohman Akhtari"
 date: "02/19/2024"
 output:
@@ -37,12 +37,21 @@ Just state the problem/MLCP whatever The Maximum Location Coverage Problem (MLCP
 
 # Methodology
 
+$$
+\text{max} \sum_{i \in I} g_iY_i \\
+\text{s.t.} \sum_{j \in N_i}x_j \geq Y_i \ \forall i \in I, \ (1)\\
+\sum_{j \in J} x_j \leq p, \ (2) \\
+x_j, y_i \in \{0,1\}, \\
+y_i = \begin{cases} 1 & \text{if } i \text{ is covered by at least one facility} \\
+                    0 & \text{otherwise }\end{cases}
+$$
+
 readd the formula n nerdy shit, let me know if you need a screenshot added in 
 
 
-# Part A
+# Case Study | Charlotte Area Transit System (CATS)
 
-Measured at vgvarious distances, intro them to the graphs 
+In our study we examined a sample bus line in the Charlotte metropolitan area. Our objective was to measure overlap and redundancy in coverage among bus stations contingent on a person's willingness to travel to a specific bus stop. Our sample included 941 demand nodes, each of which was measured as equal weight and was assumed to travel to the closest bus stop for their final destination. Using various distances as the radius each stop covers, all distances managed to accommodate nearly every demand node after 12 bus stops, as shown in the graph below.  
 
 
 ```r
@@ -52,10 +61,13 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a731
 ![](https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart1New.png)<!-- -->
 
 
-Measure the amount of pop that can be accomed depending on how far someone is to travel. 
-Explain why it meets  at 12, or almost does
-the early flatline for 2.5 and 3k
+We notice in the graph that all measured distances end up 'flatlining' because the entire sample was covered after 12 stations were strategically placed. This also means every bus stop added after the 12th added zero value to the transit line and decreased its efficiency. 
 
+The weakness within the survey is the measured distance a person is assumed to travel. Majority of people are willing to walk for five to ten minutes, or approximately ¼- to ½-mile to a transit stop FOOTNOTEHERE. To better reflect a person's travel distance we would need to measure each station using an 800 meter radius. Regardless of the flaw, the 46 total bus stops sampled is excessive for the single transit line.  
+
+!! NOHMAN ADD NOTIATIONS THANK YOU! !!! 1 with reference 
+U.S Department of Transportation, Federal Highway Administration
+https://safety.fhwa.dot.gov/ped_bike/ped_transit/ped_transguide/ch4.cfm#:~:text=Most%20people%20are%20willing%20to,stop%20(see%20figure%20below).
 
 
 
@@ -65,12 +77,8 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/1a547eb4a
 
 ![](https://github.com/TrevorKap/Classes_MUSA/raw/1a547eb4a4aa282760be961b8f770f284639c07c/SpatialOptimization/p10.png)<!-- -->
 
-We see this when we allow a max of 10 bus stops. when its 3k we only need  7. Yet here is the overlap that occurs when its 3k. 
-Explain the demand nodes  and how cplex recognizes each need to be covered.
 
-Why did i undissolve the 3k layer but not the 2.5k 
-
-
+The map above displays the overlap among the chosen bus stops if 3,000 meters (blue) was the calculated willingness to travel. Despite the model only choosing 7 stations, there is already large areas of overlap among 2-3 other bus stations, with every demand node covered with multiple options. The area covered by stations with a 2,500 meter buffer (red) fulfill the same objective but do not cover the far reaching areas covered by the blue buffer.  
 
 
 
@@ -80,10 +88,7 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/1a547eb4a
 
 ![](https://github.com/TrevorKap/Classes_MUSA/raw/1a547eb4a4aa282760be961b8f770f284639c07c/SpatialOptimization/p15.png)<!-- -->
 
-Still plenty of overlap with 2,500m, people dont actually walk this far. P = 7 even when allowing CPLEX to choose 10 stations. We see the inefficient overlap when we allow 15 for 2.5k yet only needs 7 again fro 3k. 
-
-explain the undissolve of 2.5k and why it shows inefficiency 
-P = 7 again because it literally never needed it. 
+Despite the additional bus stops presented and the decrease distanced of assumed travel, there is overlap between bus stations along the road the bus line travels along. This overlap indicates the issue is the location of the existing bus stops, as they are too close together and cover the same populations. 
 
 
 ```r
@@ -92,11 +97,9 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a731
 
 ![](https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a73146d91b8650bb14d71c8ba311181cab1/SpatialOptimization/SpatialOptHW2chart2New.png)<!-- -->
 
-When population adjusted how much do we really need? 8
-Which distance should be used to understand willingness to travel? 
+In the graph we ran the model while considered population density for each demand node, measuring the differences between the city center's demand compared to the suburbs. Even with population accounted for, both assumed willing travel distances only required a maximum of 8 bus stops along the sample in order to cover 100% of demand. 
 
 
 # Conclusion
 
-how do we measure willingness to travel, how do we change it? 
-What do these maps say about the current charlotte transit? Mind you that both the 2.5k and 3k stops are all currently just ONE LINE. 
+Despite the nuances and external factors not accounted for in the model and study, there is clear redundancy in the sampled transit line and there are multiple solution to improve the efficiency of the bus line. One way is to relocate existing bus stops that cover underserved or outreaching communities who do not have walkable access to a bus stop. Another is to skip existing bus stops that do not service a unique audience and are already overlapping cover with adjacent stations. Lastly, it is recommended to reconduct the study with more realistic walkable travel distances to better accurately measure each bus stop's existing coverage. 
