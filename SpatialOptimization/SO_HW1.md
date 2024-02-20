@@ -1,5 +1,7 @@
 ---
 title: '**Spatial Optimization: Maximum Covering Location Problem**'
+author: "Trevor Kapuvari, Nohman Akhtari"
+date: "02/19/2024"
 output:
   html_document:
     keep_md: yes
@@ -35,16 +37,11 @@ In this study, we use ArcGIS Pro and CPLEX to solve the Maximum Location Coverag
 
 $$
 \text{max} \sum_{i \in I} g_iY_i \\
-
-
 \text{s.t.} \sum_{j \in N_i}x_j \geq Y_i \ \forall i \in I, \ (1)\\
-
 \sum_{j \in J} x_j \leq p, \ (2) \\
-
 x_j, y_i \in \{0,1\}, \\
-
 y_i = \begin{cases} 1 & \text{if } i \text{ is covered by at least one facility} \\
-                    0 & \text{otherwise }\end{cases}.
+                    0 & \text{otherwise }\end{cases}
 $$
 
 # Methodology
@@ -57,7 +54,29 @@ After solving the maximization problem with CPLEX, the MCLP will give us the ide
 
 # MCLP in Concept
 
+Consider the following coverage matrix. We have 8 demand nodes (i=1....8)
+and 8 potential sites –facilities- (j=1....8). You can interpret this as follows:
+Demand node i=1 can be covered by sites j=1,2 and 3, demand node 2 can be
+covered by sites j.
 
+
+```r
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/e3a51a54503019804be0736d3863cf56d10efb12/SpatialOptimization/MatrixHW1.png")
+```
+
+![](https://github.com/TrevorKap/Classes_MUSA/raw/e3a51a54503019804be0736d3863cf56d10efb12/SpatialOptimization/MatrixHW1.png)<!-- -->
+
+When solving for which facilities to choose first, the most optimal/most effective place to start is the facility with the most demand. In this case, g2. g2 has the largest demand and when we are given the ability to choose more facilities, the most logical approach is to cover the next largest demand. This flow cascades until it reaches the maximum amount of allowed covered sites.
+
+
+
+```r
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/acbff38ff5cb1b18fb2719a1d426b8a908301f10/SpatialOptimization/PartA.png")
+```
+
+![](https://github.com/TrevorKap/Classes_MUSA/raw/acbff38ff5cb1b18fb2719a1d426b8a908301f10/SpatialOptimization/PartA.png)<!-- -->
+
+When starting with the outlier, facility 2, roughly 80% of demand is already covered. Following the next largest nodes of demand fractionally increase coverage until there is marginal returns per additional covered site (P value).
 
 # Cast Study, Moscow, Idaho
 
