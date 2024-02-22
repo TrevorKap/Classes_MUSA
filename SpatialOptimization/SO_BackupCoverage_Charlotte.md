@@ -32,21 +32,24 @@ theme_update(plot.title = element_text(hjust = 0.5))
 
 
 # Introduction
+Transportation planning often are challenged to balance accessibility through location stops versus maintaining or increasing efficiency to ensure the route is practical. We use ArcGIS Pro and CPLEX to solve problems involving the maximum covering location problem (MCLP). We will specifically use a sample bus line in Charlotte to analyse the sensitivity of the coverage model by varying the willingness of agents to commute to travel nodes. The main outcome is that that after a certain amount of placed stops, coverage will not increase as all demand will be satisfied. 
 
-Just state the problem/MLCP whatever The Maximum Location Coverage Problem (MLCP)
+Solving MCLP models via ArcGIS Pro offers powerful visual insights to urban transportation policy makers as this case study will demonstrate, and we believe that in future, it will rarely be the case that decisions on new transport lines will be taken without solving such models.
 
 # Methodology
+The Maximum Location Coverage Problem (MLCP) is a NP-hard maximization problem in computational complexity theory that optimizes to cover a maximum of demand subject to constraints. A typical use for MLCP is the siting of public service facilities, as public funds should be deployed to their maximum efficiency. Mathematically speaking, the MLCP has the form
 
 $$
 \text{max} \sum_{i \in I} g_iY_i \\
 \text{s.t.} \sum_{j \in N_i}x_j \geq Y_i \ \forall i \in I, \ (1)\\
 \sum_{j \in J} x_j \leq p, \ (2) \\
-x_j, y_i \in \{0,1\}, \\
-y_i = \begin{cases} 1 & \text{if } i \text{ is covered by at least one facility} \\
-                    0 & \text{otherwise }\end{cases}
+x_j, Y_i \in \{0,1\}, \\
+Y_i = \begin{cases} 1 & \text{if } i \text{ is covered by at least one facility} \\
+                    0 & \text{otherwise }\end{cases}.
 $$
+In this form, $g_i$ is the demand at a location and $Y_i$ is a decision variable that is constrained to be either zero or one. Thus, the objective functions aims to capture the most amount of demand possible given that we can place a maximum of $p$ facilities (constraint (2), also called budget constraint in Game Theory)) and that a demand node can only be covered if at least one facility is covering it (constraint (1)).
 
-readd the formula n nerdy shit, let me know if you need a screenshot added in 
+It should be noted that the MCLP can he highly sensitive to the input variables, as we will see in our sample bus line analysis in Charlotte. This is to say that slight changes in the constraint can lead to utterly distinct optimization results, and that therefore, thorough prior research is required for a proper use of MCLP.
 
 
 # Case Study | Charlotte Area Transit System (CATS)
@@ -63,12 +66,7 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/c27c6a731
 
 We notice in the graph that all measured distances end up 'flatlining' because the entire sample was covered after 12 stations were strategically placed. This also means every bus stop added after the 12th added zero value to the transit line and decreased its efficiency. 
 
-The weakness within the survey is the measured distance a person is assumed to travel. Majority of people are willing to walk for five to ten minutes, or approximately ¼- to ½-mile to a transit stop FOOTNOTEHERE. To better reflect a person's travel distance we would need to measure each station using an 800 meter radius. Regardless of the flaw, the 46 total bus stops sampled is excessive for the single transit line.  
-
-!! NOHMAN ADD NOTIATIONS THANK YOU! !!! 1 with reference 
-U.S Department of Transportation, Federal Highway Administration
-https://safety.fhwa.dot.gov/ped_bike/ped_transit/ped_transguide/ch4.cfm#:~:text=Most%20people%20are%20willing%20to,stop%20(see%20figure%20below).
-
+The weakness within the survey is the measured distance a person is assumed to travel. Majority of people are willing to walk for five to ten minutes, or approximately ¼- to ½-mile to a transit stop^[U.S. Department of Transportation. https://safety.fhwa.dot.gov/ped_bike/ped_transit/ped_transguide/ch4.cfm#]. To better reflect a person's travel distance we would need to measure each station using an 800 meter radius. Regardless of the flaw, the 46 total bus stops sampled is excessive for the single transit line.  
 
 
 ```r
