@@ -1,0 +1,83 @@
+---
+title: '**Location Allocation, Measuring Shortest Possible Distance**'
+subtitle: "Trevor Kapuvari, Nohman Akhtari"
+author: "University of Pennsylvania"  
+date: "02/23/2024"
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+    theme: readable
+    toc_float: yes
+    code_folding: hide
+    number_sections: no
+    css: style.css
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, results = 'hide', message = FALSE, warning = FALSE, error = FALSE}
+library(tidyverse)
+library(tidycensus)
+library(sf)
+library(knitr)
+library(viridis)
+library(bookdown)
+library(MASS)
+library(rmarkdown)
+options(scipen = 999)
+knitr::opts_chunk$set(echo = TRUE)
+theme_update(plot.title = element_text(hjust = 0.5))
+```
+
+
+# Introduction
+Human nature, when travelling for any goal/purpose is to measure, is to take the shortest route possible. In terms of economics, amenities are situated within a general radius of one another that accommodate a person's frequency of travel to said locations. Pharmacies are often frequented by the general population and therefore do not require a large amount of people to sustain them. Hence, these places are often small but several throughout a region. In our study, we measure the difference in distance travelled (as a  collective) increases when there are less pharmacies in a given area. 
+
+# Methodology
+Blah blah blah g
+
+$$
+\text{max} \sum_{i \in I} g_iY_i \\
+\text{s.t.} \sum_{j \in N_i}x_j \geq Y_i \ \forall i \in I, \ (1)\\
+\sum_{j \in J} x_j \leq p, \ (2) \\
+x_j, Y_i \in \{0,1\}, \\
+Y_i = \begin{cases} 1 & \text{if } i \text{ is covered by at least one facility} \\
+                    0 & \text{otherwise }\end{cases}.
+$$
+I wanna eat a donut 
+
+
+# Case Study | Mecklenburg  County, North Carolina
+
+In Mecklenburg County we counted pharmacies out the ass.
+
+key points
+removed demand notes with population demand of 0 because application limit of 10k row per location  allocation command. 
+
+```{r Chart 1}
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/604516eac37357921ca422d10afb507ff430280a/SpatialOptimization/PharmacyMilesHW3.png")
+
+```
+
+15 and 35 highlighted to show the huge ass difference there is. 
+Measuring total weighted distance as in the cumulative amount of miles travelled by all people of a population to reach each pharmacy. 
+
+```{r Map 1}
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/604516eac37357921ca422d10afb507ff430280a/SpatialOptimization/Map35.png")
+
+```
+
+
+Pharmacies of p= 35 include the pharmacies of p=15 but not vise versa.  
+
+```{r Map 2 All}
+knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/604516eac37357921ca422d10afb507ff430280a/SpatialOptimization/MapAllhw3.png")
+
+```
+
+Here is the one of everyone, nothing too much different but 35 lowkey seems pretty reasonable. 
+
+
+# Conclusion
+
