@@ -33,7 +33,7 @@ theme_update(plot.title = element_text(hjust = 0.5))
 
 
 # Introduction
-Human nature, when travelling for any goal/purpose is to measure, is to take the shortest route possible. In terms of economics, amenities are situated within a general radius of one another that accommodate a person's frequency of travel to said locations. Pharmacies are often frequented by the general population and therefore do not require a large amount of people to sustain them. Hence, these places are often small but several throughout a region. In our study, we measure the difference in distance travelled (as a  collective) increases when there are less pharmacies in a given area. 
+Human nature, when travelling for any goal/purpose is to measure, is to take the shortest route possible. In terms of economics, amenities are situated within a general radius of one another that accommodate a person's frequency of travel to said locations. Pharmacies are often frequented by the general population and therefore do not require a large amount of people to sustain them. Hence, these places are often small but several throughout a region. In our study, we measure the difference in distance traveled (as a  collective) increases when there are less pharmacies in a given area. 
 
 # Methodology
 Blah blah blah g
