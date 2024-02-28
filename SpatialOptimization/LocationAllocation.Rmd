@@ -32,7 +32,7 @@ theme_update(plot.title = element_text(hjust = 0.5))
 
 
 # Introduction
-Human nature, when travelling for any goal/purpose is to measure, is to take the shortest route possible. In terms of economics, amenities are situated within a general radius of one another that accommodate a person's frequency of travel to said locations. Pharmacies are often frequented by the general population and therefore do not require a large amount of people to sustain them. Hence, these places are often small but several throughout a region. In our study, we measure the difference in distance traveled (as a  collective) increases when there are less pharmacies in a given area. We do so by using the Location-Allocation problem to find the ideal distribution of pharmacies, and then will start playing with the parameters of our model.
+Human nature, when travelling for any goal/purpose, is to take the shortest route possible. Pharmacies are frequented by the general population and therefore do not require a large amount of people to sustain them. Hence, pharmacies are often small and several throughout a region. In our study, we measure the difference in distance traveled (as a  collective) when there are a specified number of pharmacies in a given area. We do so by using the Location-Allocation problem to find the ideal distribution of pharmacies, and then will start playing with the parameters of our model. Our model evaluates the pre-existing pharmacies in a given region with an input on a specified number of these pharmacies to select. The model's objective is to connect each demand node (population point) to the closest selected pharmacy. Ultimately, this result aims to reduce the amount of miles driven by all populations with respect to the specified number of pharmacies. 
 
 # Methodology
 Location-Allocation optimization is a method used to ideally situate facilities with the goal to satisfy all demand with the shortest path possible to each site. To set up our equation, we first introduce some notation. Let $n \in \mathbb{N}$ denote the number of demand areas, and let $m \in \mathbb{N}$ denote the number of potential facility sites. Further, let
@@ -58,7 +58,6 @@ X_{ij} \leq Y_j \ \forall i,j \\
 \sum_{j=1}^mY_j=p \\
 Y_j \in \{0,1\}\ \forall j \\
 X_{ij} \in \{0,1\} \  \forall i,j.
-
 $$
 The idea behind the given objective function is to look at the product of demand at area $i$ and the defined distance to the facility at site $j.$ In an ideal scenario, we satisfy our goal of covering all demand by locating each facility such that the total walking distance is minimized globally. The term $X_{ij}$ is a binary that serves as selector. 
 
