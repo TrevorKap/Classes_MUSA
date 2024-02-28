@@ -36,18 +36,34 @@ theme_update(plot.title = element_text(hjust = 0.5))
 Human nature, when travelling for any goal/purpose is to measure, is to take the shortest route possible. In terms of economics, amenities are situated within a general radius of one another that accommodate a person's frequency of travel to said locations. Pharmacies are often frequented by the general population and therefore do not require a large amount of people to sustain them. Hence, these places are often small but several throughout a region. In our study, we measure the difference in distance traveled (as a  collective) increases when there are less pharmacies in a given area. 
 
 # Methodology
-Blah blah blah g
+Location-Allocation optimization is a method used to ideally situate facilities with the goal to satisfy all demand with the shortest path possible to each site. To set up our equation, we first introduce some notation. Let $n \in \mathbb{N}$ denote the number of demand areas, and let $m \in \mathbb{N}$ denote the number of potential facility sites. Further, let
 
 $$
-\text{max} \sum_{i \in I} g_iY_i \\
-\text{s.t.} \sum_{j \in N_i}x_j \geq Y_i \ \forall i \in I, \ (1)\\
-\sum_{j \in J} x_j \leq p, \ (2) \\
-x_j, Y_i \in \{0,1\}, \\
-Y_i = \begin{cases} 1 & \text{if } i \text{ is covered by at least one facility} \\
-                    0 & \text{otherwise }\end{cases}.
+i = \text{index of demand area}\\
+j = \text{index of potential facility site}\\
+d_{ij} = \text{shortest distance from demand area } i \text{ to potential facility site }j\\
+a_i = \text{demand at area } i\\
+p = \text{number of facilities to be located}\\
+Y_j = \begin{cases} 1, & \text{if facility at site } j \text{ is located}\\0, & \text{otherwise} \end{cases}\\
+X_{ij} = \begin{cases} 1, & \text{if demand at area } i \text{ is satisfied by facility at }j\\0, & \text{otherwise} \end{cases}.
+$$
+Note that we have some degree of flexibility when defining $d_{ij}.$ For example, we could use network travel time or some other indirect metric of distance depending on the goal of the analysis.
+
+With this notation, the Location-Allocation optimization problem can be given by
+
+$$
+min\sum_{i=1}^n\sum_{j=1}^ma_id_{ij}X_{ij}\\
+\text{subject to} \\
+\begin{align}
+X_{ij} \leq Y_j \forall i,j \\
+\sum_{j=1}^mY_j=p \\
+Y_j \in \{0,1\} \forall j \\
+X_{ij} \in \{0,1\} \forall i,j
+\end{align}
+
 $$
 
-
+asd
 
 # Case Study | Mecklenburg  County, North Carolina
 
