@@ -32,7 +32,7 @@ theme_update(plot.title = element_text(hjust = 0.5))
 
 
 # Introduction
-Transportation planning often are challenged to balance accessibility through location stops versus maintaining or increasing efficiency to ensure the route is practical. We use ArcGIS Pro and CPLEX to solve problems involving the maximum covering location problem (MCLP). We will specifically use a sample bus line in Charlotte to analyse the sensitivity of the coverage model by varying the willingness of agents to commute to travel nodes. The main outcome is that that after a certain amount of placed stops, coverage will not increase as all demand will be satisfied. 
+Transportation planners often are challenged to balance accessibility through location stops versus maintaining or increasing efficiency to ensure the route is practical. We use ArcGIS Pro and CPLEX to solve problems involving the maximum covering location problem (MCLP). We will specifically use a sample bus line in Charlotte to analyse the sensitivity of the coverage model by varying the willingness of agents to commute to travel nodes. The main outcome is that that after a certain amount of placed stops, coverage will not increase as all demand will be satisfied. 
 
 Solving MCLP models via ArcGIS Pro offers powerful visual insights to urban transportation policy makers as this case study will demonstrate, and we believe that in future, it will rarely be the case that decisions on new transport lines will be taken without solving such models.
 

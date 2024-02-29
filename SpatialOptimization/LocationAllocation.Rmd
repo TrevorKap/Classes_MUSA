@@ -61,9 +61,9 @@ X_{ij} \in \{0,1\} \  \forall i,j.
 $$
 The idea behind the given objective function is to look at the product of demand at area $i$ and the defined distance to the facility at site $j.$ In an ideal scenario, we satisfy our goal of covering all demand by locating each facility such that the total walking distance is minimized globally. The term $X_{ij}$ is a binary that serves as selector. 
 
-Moving on, our first constraint requires that each demand area $i$ will have exactly 1 facility at location $j$ that covers it. The second constraint ensures that we can only satisfy demand at area $i$ if there actually exists a facility at location $j,$ and the third conditions specifies the number of total locations that can be placed. The last two conditions require that both $Y_j$ and $X_{ij}$ are binary.
+Our first constraint requires that each demand area $i$ will have exactly 1 facility at location $j$ that covers it. The second constraint ensures that we can only satisfy demand at area $i$ if there actually exists a facility at location $j,$ and the third conditions specifies the number of total locations that can be placed. The last two conditions require that both $Y_j$ and $X_{ij}$ are binary.
 
-The intuition behind the objective function and the first two constraints is that each demand node will is assumed to walk to that demand note that, in combination with all other demand notes, minimizes global distance. This implies that our function will find the facility closest to our demand note satisfying all the conditions above.
+The intuition behind the objective function and the first two constraints is that each demand node will is assumed to walk to that demand node that, in combination with all other demand nodes, minimizes global distance. This implies that our function will find the facility closest to our demand node satisfying all the conditions above.
 
 
 # Case Study | Mecklenburg  County, North Carolina
@@ -85,7 +85,7 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/604516eac
 
 ```
 
-The map shows all pharmacies when comparing the p-value of 35 (white) and 15 (black). In the model, all pharmacies chosen when p = 15 were also chosen when p = 35. The P35 pharmacies are scattered slightly less than the P15 pharmacies due to the abundance of additions the model needed to make in order to meet the quoted amount of facilities required. When only choosing 15 pharmacies the model took a more spread-out approach covering generally equal distances throughout the county. What the model does not consider is the demand capacity each pharmacy accommodates. When considered distance alone, the distance allocation is the optimal strategy yet when factoring demand, the additional pharmacies after P=15 started to focus on the inner-city core. In essence, the fractional coverage created when increasing the number of pharmacies from 15 to 35 focus greater attention on the inner city and, because of demand capacity not considered, marginally improve coverage. 
+The map shows all pharmacies when comparing the p-value of 35 (white) and 15 (black). In the model, all pharmacies chosen when p = 15 were also chosen when p = 35. The P35 pharmacies are scattered slightly less than the P15 pharmacies due to the abundance of additions the model needed to make in order to meet the quoted amount of facilities required. When only choosing 15 pharmacies the model took a more spread-out approach covering generally equal distances throughout the county. What the model does not consider is the demand capacity each pharmacy accommodates. When considering distance alone, the distance allocation is the optimal strategy yet when factoring demand, the additional pharmacies after P=15 started to focus on the inner-city core. In essence, the fractional coverage created when increasing the number of pharmacies from 15 to 35 focus greater attention on the inner city and, because of demand capacity not considered, marginally improve coverage. 
 
 
 ```{r Map 2 All}
@@ -93,7 +93,7 @@ knitr::include_graphics("https://github.com/TrevorKap/Classes_MUSA/raw/604516eac
 
 ```
 
-This map shows all pharmacies that currently exist. We notice that even if this amount has the lowest weighted total miles as depicted from the graph, some pharmacies have little contribution to supporting the general network. We examine these 'lesser contributions' on the edges of the country where demand nodes can redirect to other pharmacies and only fractionally increase total miles. The only true improvement that can be made, when not considered demand capacity, is to relocate inner-city pharmacies to ones further out where some point must travel large distances. 
+This map shows all pharmacies that currently exist. We notice that even if this amount has the lowest weighted total miles as depicted from the graph, some pharmacies have little contribution to supporting the general network. We examine these 'lesser contributions' on the edges of the country where demand nodes can redirect to other pharmacies and only fractionally increase total miles. The only true improvement that can be made, when not considering demand capacity, is to relocate inner-city pharmacies to ones further out where some point must travel large distances. 
 
 # Conclusion
 
