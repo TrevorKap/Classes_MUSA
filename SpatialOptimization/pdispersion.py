@@ -31,8 +31,8 @@ Y=[]
 minX=0
 maxX=100
 minY=0
-maxY=100
-interval =23
+maxY=100 
+interval =5 # interval between candidate locations
 
 k=0
 for i in range (minX, maxX, interval):

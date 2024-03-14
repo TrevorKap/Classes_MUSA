@@ -1,0 +1,174 @@
+---
+title: '**Dispersion Theory**'
+author: "Trevor Kapuvari, Nohman Akhtari"
+date: "03/14/2024"
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+    theme: sandstone
+    toc_float: yes
+    code_folding: hide
+    number_sections: no
+    css: style.css
+  pdf_document:
+    toc: yes
+---
+
+```r
+library(tidyverse)
+library(tidycensus)
+library(sf)
+library(knitr)
+library(viridis)
+library(bookdown)
+library(MASS)
+library(rmarkdown)
+options(scipen = 999)
+knitr::opts_chunk$set(echo = TRUE)
+theme_update(plot.title = element_text(hjust = 0.5))
+```
+
+# Introduction
+
+
+
+
+# Methodology
+
+
+
+$$
+\text{max} \sum_{i \in I} g_iY_i \\
+\text{s.t.} \sum_{j \in N_i}x_j \geq Y_i \ \forall i \in I, \ (1)\\
+\sum_{j \in J} x_j \leq p, \ (2) \\
+x_j, Y_i \in \{0,1\}, \\
+Y_i = \begin{cases} 1 & \text{if } i \text{ is covered by at least one facility} \\
+                    0 & \text{otherwise }\end{cases}.
+$$
+
+
+
+
+# Code
+
+Below is the Python code used to generate the LP file for the Dispersion problem. The code generates a set of candidate locations and calculates the distance between each pair of candidate locations. The code then writes the LP file for the Dispersion problem. To change the number of facilities chosen, change 'p='. To change the number of candidate locations, change 'minX', 'maxX', 'minY', 'maxY' (only for boundaries), or 'interval' (for spacing). The results are plotted below.  
+
+
+
+```python
+import random, string, os, math, time, sys
+import matplotlib.pyplot as plt   # only necessary if you want to plot
+import numpy                          # only necessary if you want to plot
+
+def distance(x1, y1, x2, y2):
+    dx = x2 - x1
+    dy = y2 - y1
+    d = math.sqrt(dx**2 + dy**2)
+    return d
+
+## parameters
+p=15            #num facilities
+M=100000        # a very large number
+
+## Generate candidate locations (uniform)
+ID=[]
+X=[]
+Y=[]
+minX=0
+maxX=100
+minY=0
+maxY=100 
+interval =5 # interval between candidate locations
+
+k=0
+for i in range (minX, maxX, interval):
+    for j in range(minY, maxY, interval):
+        ID.append(k)
+        X.append(i + random.random())
+        Y.append(j + random.random())
+        k+=1
+
+print('there are ' + str(len(X)) + ' decision variables')
+OD = []
+i=0
+while i<len(X):
+    j=0
+    while j<len(Y):
+        OD.append(str(distance(X[i], Y[i], X[j], Y[j])))
+        j=j+1
+    i=i+1
+
+
+## activate the next lines only if you want to plot the points
+plt.scatter(X, Y)
+plt.show()
+
+################# WRITING L-P file ################# 
+
+###   Objective function headings
+outputFile = open('pdispersion.txt', 'w')
+outputFile.write("Maximize D\n")
+outputFile.write("\nSubject to")
+outputFile.write("\n")
+
+#   Constraint 2 
+i=0
+while i< len(X):
+    j=i+1
+    while j < len(X):
+        Dij = OD[i*len(X) + j]
+        outputFile.write('D+' + str(M - float(Dij))+ 'X' +str(i) + '+' + str(M- float(Dij)) + 'X' +str(j) +'<= ' +str((2*M) - float(Dij)) + '\n') 
+        j+=1
+    i+=1
+
+
+#   Constraint 3- max facilities = p
+outputFile.write("\n")
+j=0
+while j < len(ID):
+    outputFile.write("+X")
+    outputFile.write(str(int(ID[j])))
+    j=j+1
+outputFile.write("="+str(p)+"\n")
+
+#   Constraint 4 - integer requirements
+outputFile.write("\n") 
+outputFile.write("Integers\n")
+
+i=0
+while i<len(X):
+    outputFile.write('X' + str(i) +'\n')
+    i=i+1
+
+outputFile.write("\n")
+outputFile.write("END\n")
+outputFile.close()
+```
+
+
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/998862e2b8c02a1738a5787e077c54fa56018b97/SpatialOptimization/PydispersionResult.png")
+```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/998862e2b8c02a1738a5787e077c54fa56018b97/SpatialOptimization/PydispersionResult.png)<!-- -->
+
+# Results
+
+The results of the 
+
+
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/FacilityCountP4.png")
+```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/FacilityCountP4.png)<!-- -->
+
+
+
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/FacilityCountvOV4.png")
+```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/FacilityCountvOV4.png)<!-- -->
+
