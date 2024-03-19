@@ -30,13 +30,13 @@ theme_update(plot.title = element_text(hjust = 0.5))
 ```
 
 # Introduction
-The p-dispersion problem is a technique to maximize the minimum distance between the two closest pair of facilities in a network. Even though this might sound not productive at first glance, there are quite a few evident use cases for p-dispersion optimization problems. Think of facilities that can pose a threat to each other, like in some chemical factories- the gases and other byproducts might be hazardous, could interact, and therefore, are best located far from each other. For a more tangible business case, take a savvy entrepreneur who wants to open a service business- where should he best open his shop? It only makes sense to avoid competition, and therefore, maximize the minimum distance between his stores or to those of the competition.
+The p-dispersion problem is a technique to maximize the distance between the two closest pair of points in a network. The function of this optimization technique is to disseminate a value, or object, as far as possible from others of the same type. An example of such can be seen as opening a business in a competitive market. One would want to avoid competition, and therefore, maximize their distance from any other similar business to ensure they are not competing for the same customers. This is a simple example of the p-dispersion problem, but it can be applied to many other scenarios such as the placement of cell towers, fire stations, etc. In abstract, the goal is to maximize distance from similar entities within a region.
 
-In this assignment, we will take the p-dispersion problem and display how computation time significantly varies as parameters change. 
+We will examine the p-dispersion problem and display how computation time significantly varies as parameters change. 
 
 
 # Methodology
-For the purpose of this assignment, we will employ the p-dispersion maximization problem that maximizes the minimum distance between any pair of facilities at two locations. As this formulation seems a bit unintuitive, we will first introduce the mathematical formulation and then explain each term in the optimization problem. 
+Here, we break down the p-dispersion maximization problem to the theory and formula. The function is, given a set of pre-existing locations, the formula locates the optimal location for a new facility such that the distance between the new facility and the closest pre-existing facility is maximized, or chooses pre-existing facilities that maximize the distance between those facilities. The p-dispersion problem can be formulated as a linear program as follows:
 
 
 $$
@@ -46,7 +46,7 @@ $$
 X_i \in \{0,1\} \\
 Z \geq 0
 $$
-where $Z$ is the minimum distance between two facilities,$d_{ij}$ is the distance between locations $i$ and $j,$ $p$ is the number of facilities to be sited, and $m$ is a large number that is used to establish what is called an upper effective bound on $Z$. Note that if facilities at both site $i$ and $j$ are chosen, we are left with $Z \leq d_{ij}$ implying that we must chose $d_{ij}$ as distance. The upper bound on $Z$ only comes into action if none or either locations are chosen, giving us $Z \leq d_{ij}+2m$ or $Z \leq d_{ij}+m,$ respectively.
+Where $Z$ is the minimum distance between two facilities,$d_{ij}$ is the distance between locations $i$ and $j,$ $p$ is the number of facilities to be sited, and $m$ is a large number that is used to establish what is called an upper effective bound on $Z$. Note that if facilities at both site $i$ and $j$ are chosen, we are left with $Z \leq d_{ij}$ implying that we must chose $d_{ij}$ as distance. The upper bound on $Z$ only comes into action if none or either locations are chosen, giving us $Z \leq d_{ij}+2m$ or $Z \leq d_{ij}+m,$ respectively.
 
 
 
@@ -151,10 +151,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 ![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/998862e2b8c02a1738a5787e077c54fa56018b97/SpatialOptimization/PydispersionResult.png)<!-- -->
 
 # Results
+The results of the run times in seconds are based on the amount of facilities the code is expected to identify. The scale is logarithmic because of the sheer run time and data processing required to calculate the optimal number of facilities. We notice here that it can identify a single optimal facility in less than a second yet takes over 10,000 seconds (2.7 hours) to find 5 facilities. 
 
-The results of the run times in seconds based on the amount of facilities the code is expected to identify. The scale is logarithmic because of the sheer run time and data processing required to calculate the optimal number of facilities. We notice here thatit can identify a single optimal facility in less than a second yet takes over 10,000 seconds (2.7 hours) to find 5 facilities. 
-
-The runtime for $p = 1$ is very short for obvious reasons. However, it might seem unintuitive that run time decreases as the complexity of the problem increases. Nevertheless, there is a quite simple explanation. We start with $p = 20$ and realize that the total amount of possible sitings for 20 facilities given our constraints is radically lower than that for, say, $p = 10.$ This combinatorial fact also explains why runtimes decrease with increasing sample size.
+The runtime for $p = 1$ is very short due to its simplicity. However, that run time decreases as the complexity of the problem increases (from 5 onward), and has a sharp increase in its initial additions (as from 1 to 5). We start with $p = 20$ and realize that the total amount of possible sites for 20 facilities given our constraints is radically lower than that of $p = 10.$ This combinatorial fact explains runtimes decreasing with increasing sample size.
 
 
 ```r
@@ -164,12 +163,15 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 ![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/FacilityCountP4.png)<!-- -->
 
 
+Another observation is that our objective value $Z$ decreases as facility count increases. This can be explained by the fact that with increasing facility count, the minimum distance between facilities decreases. 
 
-Another observation is that our objective value $Z$ decreases as facility count increases.
 
 ```r
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/FacilityCountvOV4.png")
 ```
 
 ![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/FacilityCountvOV4.png)<!-- -->
+
+# Conclusion
+The p-dispersion problem is simple in its objective yet complex in its computation and processing. Yet the problem in theory translates to many potential practices in planning, transportation, and risk management. This study shows the multifaceted nature of the how 'chosen facility' dissemination and its relationship between runtime, our variable $Z,$ may appear straightforward to the human-mind, yet becomes a large computational process for a computer.
 
