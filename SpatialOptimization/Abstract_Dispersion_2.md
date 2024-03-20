@@ -14,7 +14,8 @@ output:
   pdf_document:
     toc: yes
 ---
-```{r setup, results = 'hide', message = FALSE, warning = FALSE, error = FALSE}
+
+```r
 library(tidyverse)
 library(tidycensus)
 library(sf)
@@ -59,10 +60,12 @@ Trevor
 # Results
 Trevor
 
-```{r Chart 2}
-knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png")
 
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png")
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png)<!-- -->
 
 
 # Conclusion
