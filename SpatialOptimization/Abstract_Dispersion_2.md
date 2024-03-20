@@ -57,8 +57,17 @@ Further, it has to be clarified that the notion of distance has to be thought of
 
 # System Evaluation
 
+When examining the graph below
 
+Where would the residence of sex offenders be if
+the city was to accept 2, 4, 6 and 8 offenders
+(changing the p-value)?
 
+How does the objective function value changes
+with a different value for p (graph it)?
+
+Report on the running time as well – IT CAN TAKE
+A LONG TIME!
 
 
 ```r
