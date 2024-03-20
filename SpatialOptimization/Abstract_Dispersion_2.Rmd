@@ -28,6 +28,31 @@ knitr::opts_chunk$set(echo = TRUE)
 theme_update(plot.title = element_text(hjust = 0.5))
 ```
 
+
+Where would the residence of sex offenders be if
+the city was to accept 2, 4, 6 and 8 offenders
+(changing the p-value)?
+b. Prepare a map that would indicate those locations
+(Which residences are selected)?
+c. Are some residences more likely to be selected
+and why?
+3
+d. How does the objective function value changes
+with a different value for p (graph it)?
+e. Report on the running time as well – IT CAN TAKE
+A LONG TIME!
+2. The city council is likely to propose two additional
+scenarios:
+a. Using p=2, where would those residences be in
+case city council would impose a 500meters ban
+from school and 500meters from any park?
+b. Using p=2, where would those residences be in
+case city council would impose a 750meters ban
+from school and 250meters from any park?
+c. Prepare a map that would show the locations for
+both a) and b) and comment on the difference.
+
+
 # Introduction
 The p-dispersion problem is a technique to maximize the minimum distance between the two closest pair of facilities in a network. Even though this might sound not productive at first glance, there are quite a few evident use cases for p-dispersion optimization problems. Think of facilities that can pose a threat to each other, like in some chemical factories- the gases and other byproducts might be hazardous, could interact, and therefore, are best located far from each other. For a more tangible business case, take a savvy entrepreneur who wants to open a service business- where should he best open his shop? It only makes sense to avoid competition, and therefore, maximize the minimum distance between his stores or to those of the competition.
 
@@ -59,8 +84,15 @@ Trevor
 # Results
 Trevor
 
-```{r Chart 2}
+```{r Map 1}
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png")
+
+```
+
+
+
+```{r Map 2}
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map2.png")
 
 ```
 
