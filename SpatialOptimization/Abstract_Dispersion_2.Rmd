@@ -31,7 +31,7 @@ theme_update(plot.title = element_text(hjust = 0.5))
 
 
 
-# Introduction (reword)
+# Introduction
 The p-dispersion problem is a technique to maximize the distance between the two closest pair of points in a network. The function of this optimization technique is to disseminate a value, or object, as far as possible from others of the same type. 
 
 In this practice study, we leverage the p-dispersion problem to a political analysis regarding homeowner eligibility for registered sex-offenders. Our objective is to locate available homes within a municipality that both enables the social rehabilitation process while mitigating recidivism risk. For our scenario, a city council agreed to consider rental properties as potential locations for registered sex-offenders seeking residency. We are examining potential locations for these individuals to reside, while considering the distance between each location to the nearest school, park, and other sex-offender occupied rentals. 
@@ -56,17 +56,9 @@ Further, it has to be clarified that the notion of distance has to be thought of
 
 # System Evaluation
 
-When examining the graph below
+The graph below displays two key metrics when understanding the computation and results of the p-dispersion problem. The top graph measures the distance between chosen rentals. As expected, as the number of eligible rentals to house the offenders increases, the distance between each rental decreases. Each increment of two rentals results in roughly half the distance between one another. 
 
-Where would the residence of sex offenders be if
-the city was to accept 2, 4, 6 and 8 offenders
-(changing the p-value)?
-
-How does the objective function value changes
-with a different value for p (graph it)?
-
-Report on the running time as well – IT CAN TAKE
-A LONG TIME!
+Meanwhile, the computation processing (run time) to calculate and identify this solution takes exponentially longer as the number of rentals increase. For reference, 576 seconds (as shown with 6 rentals) is equivalent to 9.6 minutes. Meanwhile, 19,521 seconds (as shown with 8 rentals) is equivalent to ~5.4 hours. This correlation and results are explained by the necessary diligence and cross-validation process required by the computer to calculate the optimal solution.
 
 ```{r Graph 1}
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Homework5Graph1.png")
@@ -74,15 +66,16 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 ```
 
 
-# Results
-Trevor
+# Application
+
+Without considering any further restrictions, the map below shows where rental can be contingent on the number of rentals allowed. Each number (p value) is represented by a colored-ring due to repeated solutions for certain locations. 
 
 ```{r Map 1}
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png")
 
 ```
 
-
+The city council has additional restrictions that, depending on the number of rentals allowed, impact the location of where rentals can be. The restriction scenario imposes a 500m or 750m ban from schools and 500m or 250m ban from parks. The map below shows each restriction and the potential locations for rentals if only two locations were allowed. For this specific case, the ban with either distance does not change the eligible locations. 
 
 ```{r Map 2}
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map2.png")
@@ -91,5 +84,5 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 
 
 # Conclusion
-First, we have to note that the ideal locations of offenders might satisfy all of our constraints in the maximization problem, but do not necessarily represent a feasible solution because they ignore the current socioeconomic ecosystem of the ideal locations.. The idea behind this thought is that offenders could, for example, be situated into areas with high crime and therefore be stimulated to recidivate. (to be continued)
+Through the p-dispersion formula and program, we are able to identify optimal locations while maximizing distance apart from each chosen location. This is a powerful tool for any municipality or organization looking to optimize the dispersion of a specific object or value. In our case, we were able to identify the optimal locations for rental properties to house registered sex-offenders. As excellent of a tool this practice is, computational power and socio-political implications are important to consider when applying this to real-world scenarios. 
 
