@@ -29,16 +29,16 @@ knitr::opts_chunk$set(echo = TRUE)
 theme_update(plot.title = element_text(hjust = 0.5))
 ```
 
-# Introduction
-The p-dispersion problem is a technique to maximize the minimum distance between the two closest pair of facilities in a network. Even though this might sound not productive at first glance, there are quite a few evident use cases for p-dispersion optimization problems. Think of facilities that can pose a threat to each other, like in some chemical factories- the gases and other byproducts might be hazardous, could interact, and therefore, are best located far from each other. For a more tangible business case, take a savvy entrepreneur who wants to open a service business- where should he best open his shop? It only makes sense to avoid competition, and therefore, maximize the minimum distance between his stores or to those of the competition.
-
-In this assignment, we will take the p-dispersion problem to a real-world policy issue facing municipalities. Imagine a situation in which former sex-offenders have fulfilled their prison time and now have to be reintegrated to society. How can we best locate them within a municipality to both guarantee safety for current inhabitants but also allow resocialization of former prisoners. This is a handy case for the optimization problem described above, but with a twist: The constraints should, in addition to the standard p-dispersion problem, include a minimum distance from schools or other facilities that could potentially be locations or lead to crimes by former sex-offender convicts. Additionally, we want the offenders to be as far away from each other as possible
-
-In this assignment, we will take the example of Moscow, Idaho to discover how slight changes in parameters change the siting outcome. 
 
 
-# Methodology
-For the purpose of this assignment, we will employ the p-dispersion maximization problem that maximizes the minimum distance between any pair of facilities at two locations. As this formulation seems a bit unintuitive, we will first introduce the mathematical formulation and then explain each term in the optimization problem. 
+
+# Introduction (reword)
+The p-dispersion problem is a technique to maximize the distance between the two closest pair of points in a network. The function of this optimization technique is to disseminate a value, or object, as far as possible from others of the same type. 
+
+In this practice study, we leverage the p-dispersion problem to a political analysis regarding homeowner eligibility for registered sex-offenders. Our objective is to locate available homes within a municipality that both enables the social rehabilitation process while mitigating recidivism risk. For our scenario, a city council agreed to consider rental properties as potential locations for registered sex-offenders seeking residency. We are examining potential locations for these individuals to reside, while considering the distance between each location to the nearest school, park, and other sex-offender occupied rentals. 
+
+# Methodology 
+The p-dispersion maximization problem that maximizes the distance between chosen points is depicted below.
 
 
 $$
@@ -49,14 +49,25 @@ X_id'_{ik} \leq b\\
 X_i \in \{0,1\}\\
 Z \geq 0
 $$
-where $Z$ is the minimum distance between two facilities,$d_{ij}$ is the distance between locations $i$ and $j,$ $p$ is the number of facilities to be sited, and $m$ is a large number that is used to establish what is called an upper effective bound on $Z$. Note that if facilities at both site $i$ and $j$ are chosen, we are left with $Z \leq d_{ij}$ implying that we must chose $d_{ij}$ as distance. The upper bound on $Z$ only comes into action if none or either locations are chosen, giving us $Z \leq d_{ij}+2m$ or $Z \leq d_{ij}+m,$ respectively.
+$Z$ is the minimum distance between two points,$d_{ij}$ is the distance between locations $i$ and $j,$ $p$ is the number of points to be sited, and $m$ is a number that is used to establish what is called an upper effective bound on $Z$. Note that if points at both site $i$ and $j$ are chosen, we are left with $Z \leq d_{ij}$ implying that we must chose $d_{ij}$ as distance. The upper bound on $Z$ only comes into action if none or either locations are chosen, giving us $Z \leq d_{ij}+2m$ or $Z \leq d_{ij}+m,$ respectively.
 
-Note that for each placed facility, the constraints also include a minimum distance $b$ that the sited facility must be away from. The index $k$ is the location index for facilities for which we want to build up the distance.
+Note that for each placed point, the constraints also include a minimum distance $b$ that the sited point must be away from. The index $k$ is the location index for points for which we want to build up the distance.
 
 Further, it has to be clarified that the notion of distance has to be thought of in an abstract way in the sense that it could be pure walking distance, but also aerial distance or time to get to a specified location. The choice of the distance variable is eventually up to the person who builds the model, but should be adjusted specifically to each use case to make the results more robust.
 
-# Code
-Trevor
+# System Evaluation
+
+
+
+
+
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Homework5Graph1.png")
+```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Homework5Graph1.png)<!-- -->
+
+
 # Results
 Trevor
 
@@ -66,6 +77,15 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 ```
 
 ![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png)<!-- -->
+
+
+
+
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map2.png")
+```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map2.png)<!-- -->
 
 
 # Conclusion
