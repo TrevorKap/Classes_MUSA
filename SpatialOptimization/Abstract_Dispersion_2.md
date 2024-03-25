@@ -14,7 +14,8 @@ output:
   pdf_document:
     toc: yes
 ---
-```{r setup, results = 'hide', message = FALSE, warning = FALSE, error = FALSE}
+
+```r
 library(tidyverse)
 library(tidycensus)
 library(sf)
@@ -60,27 +61,33 @@ The graph below displays two key metrics when understanding the computation and 
 
 Meanwhile, the computation processing (run time) to calculate and identify this solution takes exponentially longer as the number of rentals increase. For reference, 576 seconds (as shown with 6 rentals) is equivalent to 9.6 minutes. Meanwhile, 19,521 seconds (as shown with 8 rentals) is equivalent to ~5.4 hours. This correlation and results are explained by the necessary diligence and cross-validation process required by the computer to calculate the optimal solution.
 
-```{r Graph 1}
-knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Homework5Graph1.png")
 
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Homework5Graph1.png")
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Homework5Graph1.png)<!-- -->
 
 
 # Application
 
 Without considering any further restrictions, the map below shows where rental can be contingent on the number of rentals allowed. Each number (p value) is represented by a colored-ring due to repeated solutions for certain locations. 
 
-```{r Map 1}
-knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png")
 
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png")
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map1.png)<!-- -->
 
 The city council has additional restrictions that, depending on the number of rentals allowed, impact the location of where rentals can be. The restriction scenario imposes a 500m or 750m ban from schools and 500m or 250m ban from parks. The map below shows each restriction and the potential locations for rentals if only two locations were allowed. For this specific case, the ban with either distance does not change the eligible locations. 
 
-```{r Map 2}
-knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map2.png")
 
+```r
+knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map2.png")
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/Homework5Map2.png)<!-- -->
 
 
 # Conclusion
