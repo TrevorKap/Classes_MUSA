@@ -1,0 +1,58 @@
+---
+title: '**Dispersion Theory**'
+author: "Trevor Kapuvari, Nohman Akhtari"
+date: "03/25/2024"
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+    theme: sandstone
+    toc_float: yes
+    code_folding: hide
+    number_sections: no
+    css: style.css
+  pdf_document:
+    toc: yes
+---
+```{r setup, results = 'hide', message = FALSE, warning = FALSE, error = FALSE}
+library(tidyverse)
+library(tidycensus)
+library(sf)
+library(knitr)
+library(viridis)
+library(bookdown)
+library(MASS)
+library(rmarkdown)
+options(scipen = 999)
+knitr::opts_chunk$set(echo = TRUE)
+theme_update(plot.title = element_text(hjust = 0.5))
+```
+
+# Introduction
+Ecology is a complex system that despite centuries of research, has not yet been cracked. Modelling ecological systems has so far been close to impossible, not to speak of making predictions on how changing even a seemingly weak variable might affect the coexistence and stability of a system. Nevertheless, spatial techniques can come in handy in species preservation, especially in cases in which space has to be divided up among participants of an ecosystem. This is also partly due to the fact that policy makers can immediately see how introducing new parks or spaces might completely flip the optimization problem for preservation that will be presented in the next section.
+
+In the first part of this assignment, we will look into several endangered species in Mecklenburg County to find parcels that are critical for protection. In the second part, we will identify how many and which parcels need to be set aside to allow for recovery of a species.
+
+# Methodology
+For this assignment, we will use the Maximum Species Coverage Optimization Problem (MSCP). We first give the mathematical formulation, and then delve into each term and an explanation:
+
+$$
+\text{max } \sum_{i \in I} y_i \\
+\text{s.t. } y_i - \sum_{j \in N_{i}} x_j \leq 0 \ \forall i\\
+\sum_{j \in J} x_j \leq p \\
+x_j, y_i \in \{0,1\} \\
+\text{where }\\
+x_j = \begin{cases}1 & \text{, if we select parcel }j\\ 0 & \text{, otherwise} \end{cases}\\
+y_i = \begin{cases}1 & \text{, if species } i \text{ is represented} \\ 0 & \text{, otherwise} \end{cases} \\
+N_i \text{ is the set of parcels where species } i \text{has been observed.}
+$$
+First, note that O our objective is to maximize the sum of distinct species represented However, we are constrained by the fact that for each species, we require a parcel $j$ in $N_i$ where we actually observed the species $i.$ This leads us to the first constraint. The second constraint puts a cap to the number of parcels we can select, and the last constraint is the typical binary integer constraint.
+
+The MSCP is quite intelligible, and the relevance of available space in this problem is especially clear. Nevertheless, this model is simplistic as it does not include considerations such as synergies between species, importance of species, and whether species could coexist in a parcel without major disturbance of the ecosystem.
+
+# Code
+
+
+# Conclusion
+
+
