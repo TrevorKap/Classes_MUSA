@@ -14,7 +14,8 @@ output:
   pdf_document:
     toc: yes
 ---
-```{r setup, results = 'hide', message = FALSE, warning = FALSE, error = FALSE}
+
+```r
 library(tidyverse)
 library(tidycensus)
 library(sf)
@@ -54,53 +55,59 @@ The MSCP is quite intelligible, and the relevance of available space in this pro
 
 GRAPH 1 A
 
-```{r Graph 1}
 
+```r
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_1A.png")
-
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_1A.png)<!-- -->
 
 
 Table 1 B
 
-```{r Graph 2}
 
+```r
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Table1.B.png")
-
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/Table1.B.png)<!-- -->
 
 Graph 2 A 
 
-```{r Graph 3}
 
+```r
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_2A.png")
-
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_2A.png)<!-- -->
 
 Graph 2 B
 
-```{r Graph 4}
 
+```r
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_2B.png")
-
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_2B.png)<!-- -->
 
 Graph 2 B part 2
 
-```{r Graph 5}
 
+```r
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_2B2.png")
-
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/images/HW7_2B2.png)<!-- -->
 
 
 MAP
 
-```{r Graph 6}
 
+```r
 knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/HW7MAP.png")
-
 ```
+
+![](https://raw.githubusercontent.com/TrevorKap/Classes_MUSA/main/SpatialOptimization/HW7MAP.png)<!-- -->
 
 
 
