@@ -73,7 +73,7 @@ The results show that, when examining biodiversity in a given region and not fac
 
 # MSCP in Real-World Application
 
-In the second part of this study, we examine Mecklenburg County, North Carolina, and the species that are endangered in the region. In the graph below we identify a similar curve behavior as the previous exmple. The curve flattens out completely at p = 6, and the number of species preserved increases at a decreasing rate as it approaches said point. 
+In the second part of this study, we examine Mecklenburg County, North Carolina, and the species that are endangered in the region. In the graph below we identify a similar curve behavior as the previous example. The curve flattens out completely at p = 6, and the number of species preserved increases at a decreasing rate as it approaches said point. 
 
 ```{r Graph 3}
 
