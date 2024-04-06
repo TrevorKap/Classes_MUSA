@@ -30,13 +30,15 @@ theme_update(plot.title = element_text(hjust = 0.5))
 ```
 
 # Introduction 
-Natural Resources take many forms and governments have the responsibility between balancing preservation and economic development. One natural resource that is overlooked is endangered species, which are critical to the ecosystem. Protecting endangered species and preserving their habitats are essential to maintaining biodiversity, yet there are foregone economic opportunity costs when setting aside this land, or a recurring cost to maintain the land. There are techniques to measure the optimal balance between preserving land for protecting species and maintain parkland for public & environmental use. The Maximum Species Cover Optimization Problem (MSCP) is a mathematical model that can help determine the optimal number of parcels to set aside for species preservation. 
+Natural Resources take many forms and governments have the responsibility between balancing preservation and economic development. One natural resource that is overlooked is endangered species, which are critical to any ecosystem. Protecting endangered species and preserving their habitats are essential for maintaining biodiversity, yet there are foregone economic benefits when setting aside this land, or a recurring cost to maintain the land. There are techniques to measure the optimal balance between protecting species through preserved parkland & fiscal responsibility. The Maximum Species Cover Optimization Problem (MSCP) is a mathematical model that can help determine the optimal number of parcels to set aside for species preservation. 
 
 We will first examine how many species are preserved given a certain budget, dictating the amount of parks opened. Then, we will examine how the budgetary constraints alter the number of species preserved when there are lower park maintenance costs. 
 
 
 # Python Script 
 For this study, we will calculate the Maximum Species Coverage Optimization Problem (MSCP) in ArcGIS Pro through a Python script. 
+
+The code is designed to optimize land conservation efforts by prioritizing parcels of land based on their preservation value and associated costs. Initially, it gathers information about parcels, species, and their respective costs from specified layers. Using this data, the program sets up a Linear Programming (LP) model to maximize preservation benefits while minimizing costs. The objective function is represented as a balance of preservation value of species and the cost of preserving parcels. Constraints are then applied to limit the number of chosen parcels within a predefined threshold. Finally, it writes the LP script to an output file for further analysis that is conducted in CPLEX. When reading the code, each # next to the variable assists with definition for replication in a broader scope. 
 
 ```{Python Code}
 
@@ -47,14 +49,14 @@ arcpy.OverWriteOutput = True
 
     
 ## user specific ########################################
-parcels = "C:\\Users\\Owner\\Downloads\\hwk8data\\Newfolder\\parks.shp" 
-weightCostObj = 0
-cost = "SUM_ACRES"
-species = "species"
-weightFile= "C:\\Users\\Owner\\Downloads\\hwk8data\\Newfolder\\speciesWeights.dbf"
-weightField= 'weight'
-p = 10
-solutionFile = "C:\\Users\\Owner\\Downloads\\hwk8data\\Newfolder\\solution.txt"
+parcels = "C:\\Users\\Owner\\Downloads\\hwk8data\\Newfolder\\parks.shp" # parcels hosting species / natural resources
+weightCostObj = 0 # cost of each natural resource
+cost = "SUM_ACRES" # cost of each parcel by size 
+species = "species" # resource in each parcel
+weightFile= "C:\\Users\\Owner\\Downloads\\hwk8data\\Newfolder\\speciesWeights.dbf" # value of each resource (species)
+weightField= 'weight' # field in the weight file that contains the value of each resource
+p = 10 # number of parcels to be selected
+solutionFile = "C:\\Users\\Owner\\Downloads\\hwk8data\\Newfolder\\solution.txt" # output file
 
 
 ## 1.Inputs
@@ -185,8 +187,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 ```
 
 
-The graph......
-
+We notice here generally, as the number of parks opened increases, the number of species preserved increases. However, this increase stops at P = 10, where the maximum number of species are  preserved as indicated by the green line, 129. This level is not exceed when keeping more than 10 parks opened, leaving 10 as the smallest number of parks to open assuming the objective is to preserve every species. 
 
 # Costs and Species Rarity
 
@@ -199,7 +200,8 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 
 ```
 
-In Figure 2.....
+The objective function represents the benefit of keeping parks opened
+for the purpose of species preservation while the weight represents the cost to preserve each species. The axis of weight decreases along the x-axis meaning, as the cost decreases the benefits of preserving species increases. At a minimal cost of 1 cent an acre, as much as 121 species can be preserved (assuming 15 parks are  opened). Yet still  107 species are protected when only 5 parks are opened. As the cost decreases, the return on investment for less parks opened increases.
 
 ### Figure 3
 ```{r Graph 3}
@@ -208,12 +210,16 @@ knitr::include_graphics("https://raw.githubusercontent.com/TrevorKap/Classes_MUS
 
 ```
 
-Figuer 3....
+z1 represents the number of species preserved while z2 represents the cost of preserving each species. The y-axis represents the cost of preserving each species while the x-axis represents the number of species preserved. 
 
+There are three different behaviors for each amount provided. At P = 5, there is a consistent upward trend that flat lines between ~13 and 20. Then marginally increases thereafter. 
+
+At P = 10, there is noticeable spike and dip between 10 and 15. Then at z1 = 25, is almost just as cost-effective as P = 5. 
+
+At P = 15, there is a similar behavior to P = 10 but is much more gradual. At the beginning it is more expensive per species to preserve, but becomes much cheaper as the z1 value progresses. This makes P = 15 the most cost-effective option. 
 
 # Conclusion
 
-We notice...
-
+We have shown that the number of species preserved is directly correlated with the number of parks opened. The cost of preserving each species is variable when factoring the number of parks opened. This is because the cost of maintaining a park is fixed, but preserving species is not. The other nuance that must be considered is the numeric value we put on life in an ecosystem, as that does not necessarily account for the ecological importance it may have on an ecosystem. Regardless, more parks means more places for species to live and therefore, the cost per each to protect them decreases as well. 
 
 
